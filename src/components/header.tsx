@@ -2,11 +2,11 @@
 
 import { Menu, Phone, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { BrandMark, WhatsAppIcon, WhatsAppLogo } from "@/components/icons";
+import { BrandMark, WhatsAppIcon } from "@/components/icons";
 import { LanguageDropdown, LanguageSwitcher } from "@/components/language-switcher";
 import { type Locale, localePath } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/ar";
-import { BUSINESS_NAME, PHONE_DISPLAY, TEL_HREF, WHATSAPP_NUMBER, whatsappHref } from "@/lib/site";
+import { BUSINESS_NAME, PHONE_DISPLAY, TEL_HREF, whatsappHref } from "@/lib/site";
 
 export function Header({
   lang,
@@ -151,22 +151,6 @@ export function Header({
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           {lang === "en" && switcher}
-          {/* WhatsApp logo (no number shown): opens a chat with the business. */}
-          <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${common.whatsappTooltip} ${common.newTabShort}`}
-            className="group relative inline-flex size-10 items-center justify-center rounded-full transition-transform duration-300 ease-out-expo hover:scale-105 active:scale-95"
-          >
-            <WhatsAppLogo className="size-10" />
-            <span
-              role="tooltip"
-              className="pointer-events-none absolute end-0 top-full z-10 mt-2 whitespace-nowrap rounded-[3px] bg-ink px-3 py-1.5 text-xs font-medium text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
-            >
-              {common.whatsappTooltip}
-            </span>
-          </a>
           <button
             ref={menuButton}
             type="button"
