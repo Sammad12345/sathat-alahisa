@@ -1,26 +1,107 @@
 @import "tailwindcss";
 
+@theme {
+  --color-obsidian: #08090b;
+  --color-graphite-950: #0e1013;
+  --color-graphite-900: #14171b;
+  --color-graphite-800: #1d2126;
+  --color-graphite-700: #2a2f36;
+  --color-silver-100: #eef0f3;
+  --color-silver-300: #c7ccd3;
+  --color-silver-500: #9aa1ab;
+  --color-silver-600: #79808a;
+  --color-emerald-brand: #1f9d5c;
+  --color-emerald-bright: #2fbf75;
+  --color-emerald-deep: #0f5c37;
+
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-alexandria), var(--font-plex), ui-sans-serif, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  background: var(--color-obsidian);
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-obsidian);
+  color: var(--color-silver-100);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-emerald-deep);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-emerald-bright);
+  outline-offset: 3px;
+}
+
+@layer components {
+  /* Thin hairline used for editorial dividers */
+  .hairline {
+    background: linear-gradient(
+      to left,
+      transparent,
+      rgb(255 255 255 / 0.14) 20%,
+      rgb(255 255 255 / 0.14) 80%,
+      transparent
+    );
+    height: 1px;
+  }
+
+  /* Brushed-metal text treatment for select display words */
+  .text-metal {
+    background: linear-gradient(180deg, #ffffff 0%, #d9dde3 45%, #8e959f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Cinematic grading applied to editorial photography */
+  .grade {
+    filter: saturate(0.78) contrast(1.06) brightness(0.92);
+  }
+
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-scroll-cue {
+    animation: scroll-cue 2.2s var(--ease-out-expo) infinite;
+  }
 }
