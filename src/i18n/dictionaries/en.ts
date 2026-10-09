@@ -2,22 +2,24 @@ import type { Dictionary } from "./ar";
 
 export const en: Dictionary = {
   meta: {
-    title: "Flatbed Towing in Al-Ahsa & Al-Hofuf | Car Transport and Recovery",
+    title: "Al-Hofuf Hydraulic Towing | 24/7 Car Towing in Al-Ahsa & Al-Hofuf",
     description:
-      "Flatbed towing for broken-down and accident-damaged cars in Al-Ahsa and Al-Hofuf, with transport to other cities by arrangement. Message us on WhatsApp with your location and car details.",
+      "Hydraulic flatbed towing for broken-down and accident-damaged vehicles in Al-Ahsa and Al-Hofuf, available 24 hours a day, 7 days a week. We put your vehicle's safety first during transport, at competitive prices. Message us on WhatsApp with your location and car details.",
     keywords: [
+      "hydraulic tow truck Al-Hofuf",
       "tow truck Al-Ahsa",
+      "24/7 towing Al-Ahsa",
       "flatbed towing Al-Hofuf",
       "car transport Al-Ahsa",
       "car towing Hofuf",
       "vehicle recovery Saudi Arabia",
       "broken down car transport",
     ],
-    ogAlt: "Flatbed car transport",
+    ogAlt: "Hydraulic flatbed car transport",
     areaServed: ["Al-Ahsa", "Al-Hofuf"],
   },
   common: {
-    tagline: "Car towing & transport",
+    tagline: "Hydraulic flatbed • 24/7",
     location: { a: "Al-Ahsa", b: "Al-Hofuf" },
     whatsapp: "WhatsApp",
     whatsappCta: "Message us on WhatsApp",
@@ -59,24 +61,24 @@ export const en: Dictionary = {
       `Hello, I'd like to ask about your "${service}" service in Al-Ahsa and Al-Hofuf. I'll send my location and the car details.`,
   },
   hero: {
-    eyebrow: "Flatbed towing in Al-Ahsa & Al-Hofuf",
+    eyebrow: "Hydraulic flatbed towing in Al-Ahsa & Al-Hofuf",
     title: ["The flatbed you need,", "when you need it"],
     subtitle: "Moving your car starts with one call",
-    body: "Car towing and transport across Al-Ahsa and Al-Hofuf, made simple. Message us on WhatsApp with your location and your car's details.",
+    body: "Towing and transport for broken-down and damaged cars across Al-Ahsa and Al-Hofuf — 24 hours a day, 7 days a week. Message us on WhatsApp with your location and your car's details.",
     imageAlt: "A modern flatbed tow truck with a warning light bar on its roof",
     specs: [
       { label: "Coverage", value: "Within Al-Ahsa and Al-Hofuf" },
       { label: "Further afield", value: "Other cities by arrangement" },
-      { label: "Contact", value: "Directly by WhatsApp or phone" },
+      { label: "Hours", value: "24 hours a day, 7 days a week" },
     ],
     more: "Discover more",
   },
   highlights: {
     label: "Service highlights",
     items: [
-      { title: "Easy to reach", text: "A direct call or a WhatsApp message — no forms, no complicated steps." },
+      { title: "Available 24/7", text: "Call or message us on WhatsApp any time, day or night, seven days a week." },
       { title: "Share your location on WhatsApp", text: "Send your current location in one tap and tell us where the car needs to go." },
-      { title: "Careful car transport", text: "Your car is loaded onto the flatbed and secured before it moves." },
+      { title: "Your car's safety first", text: "Your car is loaded onto the flatbed and properly secured before it moves." },
       { title: "Serving Al-Ahsa & Al-Hofuf", text: "We serve Al-Ahsa and Al-Hofuf, with transport beyond by arrangement." },
     ],
   },
@@ -84,7 +86,7 @@ export const en: Dictionary = {
     eyebrow: "Our services",
     title: "Everything you need to move your car",
     intro:
-      "Pick the service you need and message us directly on WhatsApp. You'll get a ready-made message naming the service — just add your car details and location.",
+      "We help you find a towing solution when your car breaks down or is in an accident. Pick the service you need and message us directly on WhatsApp — you'll get a ready-made message naming the service, so just add your car details and location.",
     cta: "Ask about this service",
     items: [
       {
@@ -112,7 +114,7 @@ export const en: Dictionary = {
   why: {
     eyebrow: "Why us",
     title: ["Getting a flatbed", "should be simple."],
-    body: "When your car breaks down, the last thing you need is complication. That's why reaching us is clear and direct from the very first message.",
+    body: "We provide professional towing at competitive prices and help you move your car after a breakdown or accident. And because the last thing you need then is complication, reaching us is clear and direct from the very first message.",
     items: [
       { title: "Easy to request", text: "No app, no sign-up. One message or one call is all it takes to request a flatbed." },
       { title: "Direct contact on WhatsApp", text: "You talk to us directly and can ask anything that matters to you before agreeing." },
@@ -169,7 +171,7 @@ export const en: Dictionary = {
       },
       {
         q: "What information do you need to give a price?",
-        a: "The car type and its condition (broken down or accident-damaged), its current location and the destination. The cost depends on the distance and the car's condition, and it's explained and agreed before the service is confirmed.",
+        a: "The car type and its condition (broken down or accident-damaged), its current location and the destination. The cost depends on the distance and the car's condition; we aim to keep our prices competitive, and the price is explained and agreed before the service is confirmed.",
       },
       {
         q: "How do I send my location on WhatsApp?",
@@ -178,6 +180,10 @@ export const en: Dictionary = {
       {
         q: "Can you transport a broken-down or damaged car?",
         a: "Yes — transporting broken-down and accident-damaged cars is one of our core services. Describe the car's condition, ideally with a photo, so we can explain the loading and transport details.",
+      },
+      {
+        q: "Is your service available 24/7?",
+        a: "Yes — our service is available 24 hours a day, 7 days a week. Call or message us on WhatsApp at any time and send your location and car details.",
       },
     ],
   },
@@ -188,7 +194,7 @@ export const en: Dictionary = {
     cta: "Request the service on WhatsApp",
     orCall: "Or call us directly",
     directHeading: "Direct contact",
-    directNote: "For urgent cases, a call or WhatsApp is fastest.",
+    directNote: "We're available 24/7 — for urgent cases, a call or WhatsApp is fastest.",
   },
   form: {
     heading: "Submit a service request",
@@ -232,7 +238,7 @@ export const en: Dictionary = {
     home: "Back to the home page",
   },
   footer: {
-    about: "Flatbed towing and transport for broken-down and damaged cars in Al-Ahsa and Al-Hofuf, with transport to other cities by arrangement.",
+    about: "Hydraulic flatbed towing for broken-down and damaged cars in Al-Ahsa and Al-Hofuf, 24 hours a day, 7 days a week, with transport to other cities by arrangement.",
     pageHeading: "Page",
     navLabel: "Footer links",
     contactHeading: "Contact",

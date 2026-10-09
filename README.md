@@ -1,4 +1,4 @@
-# سطحه الاحساء الهفوف — Landing page
+# سطحه الاحساءهيدرولك الهفوف هيدرولك — Landing page
 
 Arabic (RTL) landing page for a vehicle towing and flatbed transport business in Al-Ahsa / Al-Hofuf.
 
@@ -34,7 +34,7 @@ the email server accepted the message.
 
 ## Configuration
 
-- Business name, phone and WhatsApp number live in `src/lib/site.ts`; prefilled WhatsApp messages are in the dictionaries.
+- Business name, phone (+966 54 126 4317) and WhatsApp number live in `src/lib/site.ts`; prefilled WhatsApp messages are in the dictionaries.
 - Set `NEXT_PUBLIC_SITE_URL` (e.g. `https://example.sa`) in production so canonical, Open Graph
   and structured-data URLs are absolute. On Vercel the production domain is detected automatically.
 

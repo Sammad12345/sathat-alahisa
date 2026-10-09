@@ -70,7 +70,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   if (!hasLocale(lang)) notFound();
   const { meta } = getDictionary(lang);
 
-  // Only verified details: name, phone and the service area named by the business.
+  // Only client-provided details: name, phone, service area, and the stated 24/7 availability.
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "AutomotiveBusiness",
@@ -80,6 +80,12 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
     url: `${SITE_URL}${localePath(lang)}`,
     image: `${SITE_URL}/og-image.jpg`,
     areaServed: meta.areaServed.map((name) => ({ "@type": "City", name })),
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "00:00",
+      closes: "23:59",
+    },
     knowsLanguage: ["ar", "en"],
   };
 

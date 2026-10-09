@@ -122,7 +122,7 @@ export function Header({
           >
             <BrandMark className={`hidden size-9 shrink-0 transition-colors duration-500 min-[400px]:block ${light ? "text-brand-blue" : "text-white"}`} />
             <span className="flex min-w-0 flex-col leading-tight">
-              <span lang="ar" className="truncate font-display text-[14px] font-bold sm:text-base">{BUSINESS_NAME}</span>
+              <span lang="ar" className="line-clamp-2 font-display text-[13px] font-bold leading-snug sm:truncate sm:text-base sm:leading-tight">{BUSINESS_NAME}</span>
               <span className={`hidden text-[11px] tracking-wide sm:block ${light ? "text-brand-blue" : "text-white/70"}`}>{common.tagline}</span>
             </span>
           </a>
