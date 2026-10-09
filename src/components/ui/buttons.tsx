@@ -13,6 +13,7 @@ const sizes = {
 
 type Size = keyof typeof sizes;
 
+/** Primary action (brand red) that opens WhatsApp with a prepared message. */
 export function WhatsAppButton({
   message,
   children,
@@ -31,7 +32,7 @@ export function WhatsAppButton({
       href={whatsappHref(message)}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${base} ${sizes[size]} bg-emerald-brand text-white shadow-[0_10px_30px_-12px_rgb(31_157_92/0.6)] hover:bg-emerald-bright ${className}`}
+      className={`${base} ${sizes[size]} bg-brand-red text-white shadow-[0_12px_28px_-14px_rgb(215_25_32/0.75)] hover:bg-brand-red-dark hover:shadow-[0_16px_32px_-14px_rgb(215_25_32/0.85)] ${className}`}
     >
       <WhatsAppIcon className="size-5 shrink-0" />
       <span>{children}</span>
@@ -40,26 +41,30 @@ export function WhatsAppButton({
   );
 }
 
+/** Secondary call action: outlined white over dark imagery, brand blue on light surfaces. */
 export function CallButton({
   children,
   size = "lg",
   showNumber = false,
+  tone = "onDark",
   className = "",
 }: {
   children: ReactNode;
   size?: Size;
   showNumber?: boolean;
+  tone?: "onDark" | "onLight";
   className?: string;
 }) {
+  const toneClass =
+    tone === "onDark"
+      ? "border border-white/30 bg-white/[0.06] text-white backdrop-blur-sm hover:border-white/60 hover:bg-white/[0.12]"
+      : "border border-brand-blue bg-white text-brand-blue hover:bg-brand-blue hover:text-white";
   return (
-    <a
-      href={TEL_HREF}
-      className={`${base} ${sizes[size]} border border-white/20 bg-white/[0.03] text-silver-100 backdrop-blur-sm hover:border-white/45 hover:bg-white/[0.08] ${className}`}
-    >
+    <a href={TEL_HREF} className={`${base} ${sizes[size]} ${toneClass} ${className}`}>
       <Phone className="size-[18px] shrink-0" strokeWidth={1.6} aria-hidden="true" />
       <span>{children}</span>
       {showNumber && (
-        <span dir="ltr" className="hidden text-silver-500 tabular-nums sm:inline">
+        <span dir="ltr" className="hidden tabular-nums opacity-75 sm:inline">
           {PHONE_DISPLAY}
         </span>
       )}

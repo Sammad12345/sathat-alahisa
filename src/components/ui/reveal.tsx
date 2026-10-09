@@ -52,13 +52,22 @@ export function Reveal({
   );
 }
 
-export function SectionEyebrow({ index, children }: { index: string; children: ReactNode }) {
+export function SectionEyebrow({
+  index,
+  children,
+  tone = "light",
+}: {
+  index: string;
+  children: ReactNode;
+  /** Surface the eyebrow sits on. */
+  tone?: "light" | "dark";
+}) {
   return (
-    <p className="flex items-center gap-3 text-[13px] font-medium tracking-wide text-silver-500">
-      <span dir="ltr" className="font-display tabular-nums text-silver-300">
+    <p className={`flex items-center gap-3 text-[13px] font-medium tracking-wide ${tone === "light" ? "text-slate" : "text-silver-300"}`}>
+      <span dir="ltr" className="font-display tabular-nums text-brand-red">
         {index}
       </span>
-      <span className="h-px w-8 bg-white/25" aria-hidden="true" />
+      <span className={`h-px w-8 ${tone === "light" ? "bg-brand-blue/30" : "bg-white/30"}`} aria-hidden="true" />
       <span>{children}</span>
     </p>
   );

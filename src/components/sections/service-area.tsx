@@ -15,7 +15,7 @@ export function ServiceArea({
   message: string;
 }) {
   return (
-    <section aria-labelledby="area-title" className="relative isolate overflow-hidden bg-obsidian py-24 sm:py-32">
+    <section aria-labelledby="area-title" className="relative isolate overflow-hidden bg-ink py-24 sm:py-32">
       <Image
         src={areaImage}
         alt=""
@@ -29,7 +29,7 @@ export function ServiceArea({
 
       <div className="mx-auto grid max-w-7xl gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:px-10">
         <Reveal className="lg:col-span-6">
-          <SectionEyebrow index="05">{dict.eyebrow}</SectionEyebrow>
+          <SectionEyebrow index="05" tone="dark">{dict.eyebrow}</SectionEyebrow>
           <h2 id="area-title" className="mt-6 text-balance font-display text-4xl font-bold leading-[1.25] text-white sm:text-5xl">
             {dict.title}
           </h2>
@@ -44,10 +44,10 @@ export function ServiceArea({
             {dict.coverage.map((c) => (
               <li key={c.place} className="flex items-center justify-between gap-6 border-b border-white/10 py-6">
                 <div className="flex items-center gap-4">
-                  <MapPin className="size-5 shrink-0 text-silver-500" strokeWidth={1.4} aria-hidden="true" />
+                  <MapPin className="size-5 shrink-0 text-brand-red" strokeWidth={1.4} aria-hidden="true" />
                   <span className="font-display text-2xl font-semibold text-white sm:text-3xl">{c.place}</span>
                 </div>
-                <span className="max-w-[12rem] text-end text-sm leading-6 text-silver-500">{c.note}</span>
+                <span className="max-w-[12rem] text-end text-sm leading-6 text-silver-300">{c.note}</span>
               </li>
             ))}
           </ul>

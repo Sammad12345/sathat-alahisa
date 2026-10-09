@@ -26,7 +26,7 @@ type Status =
 const EMPTY = Object.fromEntries(CONTACT_FIELDS.map((f) => [f, ""])) as ContactInput;
 
 const inputBase =
-  "w-full rounded-[3px] border bg-white/[0.03] px-4 text-[15px] text-white placeholder:text-silver-600 transition-[border-color,background-color,box-shadow] duration-300 focus:bg-white/[0.05] focus:outline-none focus-visible:outline-none";
+  "w-full rounded-[3px] border bg-paper px-4 text-[15px] text-ink placeholder:text-slate-light transition-[border-color,background-color,box-shadow] duration-300 focus:outline-none focus-visible:outline-none";
 
 export function ContactForm({
   lang,
@@ -119,13 +119,13 @@ export function ContactForm({
   if (status.kind === "success") {
     return (
       <div role="status" className="flex min-h-[28rem] flex-col items-start justify-center gap-6 py-6">
-        <CheckCircle2 className="size-12 text-emerald-bright" strokeWidth={1.2} aria-hidden="true" />
-        <h3 className="font-display text-3xl font-semibold text-white">{dict.success.title}</h3>
-        <p className="max-w-md text-base leading-8 text-silver-300">{dict.success.body}</p>
+        <CheckCircle2 className="size-12 text-brand-blue" strokeWidth={1.2} aria-hidden="true" />
+        <h3 className="font-display text-3xl font-semibold text-navy">{dict.success.title}</h3>
+        <p className="max-w-md text-base leading-8 text-slate">{dict.success.body}</p>
         <button
           type="button"
           onClick={reset}
-          className="border-b border-white/25 pb-1 text-[15px] text-silver-100 transition-colors hover:border-white"
+          className="border-b border-brand-blue/40 pb-1 text-[15px] font-medium text-brand-blue transition-colors hover:border-brand-red hover:text-brand-red"
         >
           {dict.success.again}
         </button>
@@ -139,15 +139,15 @@ export function ContactForm({
   const fieldClass = (f: ContactField) =>
     `${inputBase} ${
       errors[f]
-        ? "border-red-400/70 focus:border-red-300 focus:shadow-[0_0_0_1px_rgb(252_165_165)]"
-        : "border-white/12 hover:border-white/25 focus:border-emerald-bright focus:shadow-[0_0_0_1px_var(--color-emerald-bright)]"
+        ? "border-red-600 focus:shadow-[0_0_0_3px_rgb(220_38_38/0.18)]"
+        : "border-line hover:border-slate-light/60 focus:border-brand-blue focus:shadow-[0_0_0_3px_rgb(20_80_180/0.18)]"
     }`;
 
   const renderLabel = (field: ContactField) => (
-    <label htmlFor={id(field)} className="mb-2 flex items-center gap-1.5 text-[13px] font-medium text-silver-300">
+    <label htmlFor={id(field)} className="mb-2 flex items-center gap-1.5 text-[13px] font-semibold text-navy">
       {dict.fields[field].label}
       {isRequired(field) && (
-        <span className="text-emerald-bright" aria-hidden="true">
+        <span className="text-brand-red" aria-hidden="true">
           *
         </span>
       )}
@@ -157,7 +157,7 @@ export function ContactForm({
 
   const renderError = (field: ContactField) =>
     errors[field] ? (
-      <p id={id(`${field}-error`)} className="mt-2 flex items-center gap-1.5 text-[13px] text-red-300">
+      <p id={id(`${field}-error`)} className="mt-2 flex items-center gap-1.5 text-[13px] font-medium text-red-700">
         <AlertCircle className="size-3.5 shrink-0" aria-hidden="true" />
         {dict.errors[errors[field]!]}
       </p>
@@ -186,13 +186,13 @@ export function ContactForm({
 
   return (
     <form ref={formRef} onSubmit={onSubmit} noValidate aria-describedby={id("intro")} className="relative">
-      <p id={id("intro")} className="mb-8 max-w-lg text-[15px] leading-7 text-silver-500">
+      <p id={id("intro")} className="mb-8 max-w-lg text-[15px] leading-7 text-slate">
         {dict.intro}
       </p>
 
       <div aria-live="assertive" className="empty:hidden">
         {summary && Object.values(errors).some(Boolean) && (
-          <p className="mb-6 flex items-center gap-2 rounded-[3px] border border-red-400/30 bg-red-400/[0.06] px-4 py-3 text-sm text-red-200">
+          <p className="mb-6 flex items-center gap-2 rounded-[3px] border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-800">
             <AlertCircle className="size-4 shrink-0" aria-hidden="true" />
             {dict.errors.summary}
           </p>
@@ -229,7 +229,7 @@ export function ContactForm({
           {errors.phone ? (
             renderError("phone")
           ) : (
-            <p id={id("phone-hint")} className="mt-2 text-[12px] text-silver-600">
+            <p id={id("phone-hint")} className="mt-2 text-[12px] text-slate-light">
               {dict.fields.phone.hint}
             </p>
           )}
@@ -247,18 +247,18 @@ export function ContactForm({
               aria-invalid={errors.service ? true : undefined}
               aria-required
               aria-describedby={describedBy("service")}
-              className={`${fieldClass("service")} h-12 appearance-none pe-10 ${values.service ? "" : "text-silver-600"}`}
+              className={`${fieldClass("service")} h-12 appearance-none pe-10 ${values.service ? "" : "text-slate-light"}`}
             >
-              <option value="" disabled className="bg-graphite-900 text-silver-500">
+              <option value="" disabled className="text-slate-light">
                 {dict.fields.service.placeholder}
               </option>
               {[...services, dict.fields.service.other].map((s) => (
-                <option key={s} value={s} className="bg-graphite-900 text-white">
+                <option key={s} value={s} className="text-ink">
                   {s}
                 </option>
               ))}
             </select>
-            <ChevronDown className="pointer-events-none absolute end-4 top-1/2 size-4 -translate-y-1/2 text-silver-500" aria-hidden="true" />
+            <ChevronDown className="pointer-events-none absolute end-4 top-1/2 size-4 -translate-y-1/2 text-brand-blue" aria-hidden="true" />
           </div>
           {renderError("service")}
         </div>
@@ -284,7 +284,7 @@ export function ContactForm({
       </div>
 
       {status.kind === "failure" && (
-        <div role="alert" className="mt-8 rounded-[3px] border border-amber-300/25 bg-amber-300/[0.06] px-5 py-4 text-sm leading-7 text-amber-100">
+        <div role="alert" className="mt-8 rounded-[3px] border border-amber-300 bg-amber-50 px-5 py-4 text-sm leading-7 text-amber-900">
           {dict.failure[status.reason]}
         </div>
       )}
@@ -294,7 +294,7 @@ export function ContactForm({
           type="submit"
           disabled={submitting}
           aria-disabled={submitting}
-          className="group inline-flex h-14 items-center justify-center gap-3 rounded-[3px] bg-white px-8 text-base font-semibold text-obsidian transition-[background-color,transform] duration-300 ease-out-expo hover:bg-silver-100 active:scale-[0.98] disabled:cursor-wait disabled:opacity-80"
+          className="group inline-flex h-14 items-center justify-center gap-3 rounded-[3px] bg-brand-red px-8 text-base font-semibold text-white shadow-[0_12px_28px_-14px_rgb(215_25_32/0.75)] transition-[background-color,transform] duration-300 ease-out-expo hover:bg-brand-red-dark active:scale-[0.98] disabled:cursor-wait disabled:opacity-80"
         >
           {submitting && <Loader2 className="size-5 animate-spin motion-reduce:animate-none" aria-hidden="true" />}
           {submitting ? dict.submitting : dict.submit}
@@ -309,15 +309,15 @@ export function ContactForm({
           aria-describedby={id("wa-note")}
           className={`inline-flex items-center gap-2.5 self-start border-b pb-1 text-[15px] font-medium transition-colors sm:self-auto ${
             status.kind === "failure"
-              ? "border-emerald-bright text-white"
-              : "border-white/20 text-silver-300 hover:border-emerald-bright hover:text-white"
+              ? "border-brand-blue text-brand-blue"
+              : "border-brand-blue/30 text-brand-blue hover:border-brand-blue"
           }`}
         >
-          <WhatsAppIcon className="size-[18px] text-emerald-bright" />
+          <WhatsAppIcon className="size-[18px] text-whatsapp" />
           {dict.whatsappAlt}
         </a>
       </div>
-      <p id={id("wa-note")} className="mt-3 text-[12px] text-silver-600 sm:text-end">
+      <p id={id("wa-note")} className="mt-3 text-[12px] text-slate-light sm:text-end">
         {dict.whatsappReview}
       </p>
       <p role="status" className="sr-only">

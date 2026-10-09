@@ -17,12 +17,15 @@ export function LanguageSwitcher({
   path,
   label,
   size = "compact",
+  tone = "onDark",
   className = "",
 }: {
   lang: Locale;
   path: string;
   label: string;
   size?: "compact" | "full";
+  /** Surface behind the switcher: over the dark hero, or on a light header/panel. */
+  tone?: "onDark" | "onLight";
   className?: string;
 }) {
   // Keep the visitor on the same section when switching.
@@ -51,11 +54,14 @@ export function LanguageSwitcher({
   };
 
   const full = size === "full";
+  const dark = tone === "onDark";
 
   return (
     <nav aria-label={label} className={className}>
       <ul
-        className={`flex items-center rounded-[3px] border border-white/15 bg-white/[0.03] backdrop-blur-sm ${
+        className={`flex items-center rounded-[3px] border transition-colors duration-500 ${
+          dark ? "border-white/25 bg-white/[0.06] backdrop-blur-sm" : "border-line bg-paper"
+        } ${
           full ? "h-12 w-full" : "h-10"
         }`}
       >
@@ -63,7 +69,7 @@ export function LanguageSwitcher({
           const active = option.locale === lang;
           return (
             <li key={option.locale} className={`flex h-full items-center ${full ? "flex-1" : ""}`}>
-              {i > 0 && <span aria-hidden="true" className="h-4 w-px bg-white/20" />}
+              {i > 0 && <span aria-hidden="true" className={`h-4 w-px ${dark ? "bg-white/25" : "bg-line"}`} />}
               <a
                 href={`${switchPath(option.locale, path)}${hash}`}
                 hrefLang={option.locale}
@@ -72,7 +78,15 @@ export function LanguageSwitcher({
                 onClick={active ? undefined : onSwitch}
                 className={`flex h-full items-center justify-center px-2.5 text-[13px] transition-colors sm:px-3.5 ${
                   full ? "w-full text-[15px]" : ""
-                } ${active ? "font-semibold text-white" : "text-silver-500 hover:text-white"}`}
+                } ${
+                  active
+                    ? dark
+                      ? "font-semibold text-white"
+                      : "font-semibold text-brand-blue"
+                    : dark
+                      ? "text-white/60 hover:text-white"
+                      : "text-slate-light hover:text-navy"
+                }`}
               >
                 <span className={full ? "" : "hidden sm:inline"}>{option.label}</span>
                 {!full && <span className="sm:hidden">{option.short}</span>}

@@ -3,7 +3,8 @@ import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Faq } from "@/components/sections/faq";
-import { Contact } from "@/components/sections/contact";
+import { RequestForm } from "@/components/sections/contact";
+import { FinalCta } from "@/components/sections/final-cta";
 import { Gallery } from "@/components/sections/gallery";
 import { Hero } from "@/components/sections/hero";
 import { Highlights } from "@/components/sections/highlights";
@@ -31,17 +32,20 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <Gallery dict={dict.gallery} />
         <ServiceArea dict={dict.area} common={dict.common} message={dict.messages.area} />
         <Faq dict={dict.faq} />
-        <Contact
+        <RequestForm
           lang={lang}
-          dict={dict.final}
+          final={dict.final}
           form={dict.form}
-          common={dict.common}
           services={dict.services.items.map((s) => s.title)}
-          message={dict.messages.final}
         />
+        <FinalCta dict={dict.final} common={dict.common} message={dict.messages.final} />
       </main>
       <Footer lang={lang} dict={dict.footer} common={dict.common} nav={dict.nav} message={dict.messages.general} />
-      <FloatingWhatsApp label={`${dict.common.whatsappCta} ${dict.common.newTabShort}`} message={dict.messages.general} />
+      <FloatingWhatsApp
+        label={`${dict.common.whatsappTooltip} ${dict.common.newTabShort}`}
+        tooltip={dict.common.whatsappTooltip}
+        greeting={dict.messages.greeting}
+      />
     </>
   );
 }

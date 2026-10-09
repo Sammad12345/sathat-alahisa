@@ -2,11 +2,11 @@
 
 import { Menu, Phone, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { BrandMark, WhatsAppIcon } from "@/components/icons";
+import { BrandMark, WhatsAppIcon, WhatsAppLogo } from "@/components/icons";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { type Locale, localePath } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/ar";
-import { BUSINESS_NAME, PHONE_DISPLAY, TEL_HREF, whatsappHref } from "@/lib/site";
+import { BUSINESS_NAME, PHONE_DISPLAY, TEL_HREF, WHATSAPP_NUMBER, whatsappHref } from "@/lib/site";
 
 export function Header({
   lang,
@@ -14,12 +14,15 @@ export function Header({
   common,
   nav,
   message,
+  overlay = true,
 }: {
   lang: Locale;
   path: string;
   common: Dictionary["common"];
   nav: Dictionary["nav"];
   message: string;
+  /** Transparent over a dark hero until scrolled; false for pages that start on a light surface. */
+  overlay?: boolean;
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -78,21 +81,22 @@ export function Header({
     };
   }, [open]);
 
-  const solid = scrolled || open;
+  // Light (white) bar once scrolled, when the menu is open, or on pages without a dark hero.
+  const light = scrolled || open || !overlay;
   // Top-right in both directions: beside the brand in RTL, in the action group in LTR.
-  const switcher = <LanguageSwitcher lang={lang} path={path} label={nav.language} />;
+  const switcher = <LanguageSwitcher lang={lang} path={path} label={nav.language} tone={light ? "onLight" : "onDark"} />;
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 ${
-        solid
-          ? "border-b border-white/[0.07] bg-obsidian/85 backdrop-blur-xl"
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ${
+        light
+          ? "border-b border-line bg-paper/95 shadow-[0_8px_24px_-18px_rgb(11_42_91/0.35)] backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-3 focus:z-50 focus:rounded-sm focus:bg-white focus:px-4 focus:py-2 focus:text-obsidian"
+        className="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-3 focus:z-50 focus:rounded-sm focus:bg-brand-blue focus:px-4 focus:py-2 focus:text-white"
       >
         {common.skipToContent}
       </a>
@@ -103,11 +107,15 @@ export function Header({
         }`}
       >
         <div className="flex min-w-0 items-center gap-3 sm:gap-5">
-          <a href={path === "/" ? "#top" : home} className="flex min-w-0 items-center gap-3 text-silver-100" aria-label={`${BUSINESS_NAME} — ${common.home}`}>
-            <BrandMark className="hidden size-9 shrink-0 text-silver-300 min-[400px]:block" />
+          <a
+            href={path === "/" ? "#top" : home}
+            className={`flex min-w-0 items-center gap-3 transition-colors duration-500 ${light ? "text-navy" : "text-white"}`}
+            aria-label={`${BUSINESS_NAME} — ${common.home}`}
+          >
+            <BrandMark className={`hidden size-9 shrink-0 transition-colors duration-500 min-[400px]:block ${light ? "text-brand-blue" : "text-white"}`} />
             <span className="flex min-w-0 flex-col leading-tight">
-              <span lang="ar" className="truncate font-display text-[14px] font-semibold sm:text-base">{BUSINESS_NAME}</span>
-              <span className="hidden text-[11px] tracking-wide text-silver-500 sm:block">{common.tagline}</span>
+              <span lang="ar" className="truncate font-display text-[14px] font-bold sm:text-base">{BUSINESS_NAME}</span>
+              <span className={`hidden text-[11px] tracking-wide sm:block ${light ? "text-brand-blue" : "text-white/70"}`}>{common.tagline}</span>
             </span>
           </a>
           {lang === "ar" && switcher}
@@ -120,7 +128,11 @@ export function Header({
                 <a
                   href={navHref(link.href)}
                   aria-current={active === link.href ? "location" : undefined}
-                  className="relative py-2 text-[15px] text-silver-300 transition-colors hover:text-white after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-[right] after:scale-x-0 after:bg-white/60 after:transition-transform after:duration-500 hover:after:scale-x-100 aria-[current=location]:text-white aria-[current=location]:after:scale-x-100 aria-[current=location]:after:bg-emerald-bright ltr:after:origin-[left]"
+                  className={`relative py-2 text-[15px] font-medium transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-[right] after:scale-x-0 after:transition-transform after:duration-500 hover:after:scale-x-100 aria-[current=location]:after:scale-x-100 ltr:after:origin-[left] ${
+                    light
+                      ? "text-navy/80 after:bg-brand-blue hover:text-brand-blue aria-[current=location]:text-brand-blue"
+                      : "text-white/85 after:bg-white hover:text-white aria-[current=location]:text-white"
+                  }`}
                 >
                   {link.label}
                 </a>
@@ -130,23 +142,22 @@ export function Header({
         </nav>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-          <a
-            href={TEL_HREF}
-            className="hidden items-center gap-2 text-sm text-silver-300 transition-colors hover:text-white xl:flex"
-          >
-            <Phone className="size-4" strokeWidth={1.6} aria-hidden="true" />
-            <span dir="ltr" className="tabular-nums">{PHONE_DISPLAY}</span>
-          </a>
           {lang === "en" && switcher}
+          {/* WhatsApp logo (no number shown): opens a chat with the business. */}
           <a
-            href={whatsappHref(message)}
+            href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex h-10 items-center gap-2 rounded-[3px] border border-emerald-brand/60 bg-emerald-brand/10 px-3 text-sm font-medium text-white transition-colors hover:bg-emerald-brand sm:px-4"
+            aria-label={`${common.whatsappTooltip} ${common.newTabShort}`}
+            className="group relative inline-flex size-10 items-center justify-center rounded-full transition-transform duration-300 ease-out-expo hover:scale-105 active:scale-95"
           >
-            <WhatsAppIcon className="size-[18px] text-emerald-bright transition-colors group-hover:text-white" />
-            <span className="hidden sm:inline">{common.whatsapp}</span>
-            <span className="sr-only sm:hidden">{common.whatsappCta}</span>
+            <WhatsAppLogo className="size-10" />
+            <span
+              role="tooltip"
+              className="pointer-events-none absolute end-0 top-full z-10 mt-2 whitespace-nowrap rounded-[3px] bg-ink px-3 py-1.5 text-xs font-medium text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+            >
+              {common.whatsappTooltip}
+            </span>
           </a>
           <button
             ref={menuButton}
@@ -155,7 +166,9 @@ export function Header({
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? nav.close : nav.open}
-            className="inline-flex size-10 items-center justify-center rounded-[3px] border border-white/15 text-silver-100 transition-colors hover:border-white/40 lg:hidden"
+            className={`inline-flex size-10 items-center justify-center rounded-[3px] border transition-colors lg:hidden ${
+              light ? "border-line text-navy hover:border-brand-blue" : "border-white/30 text-white hover:border-white/60"
+            }`}
           >
             {open ? <X className="size-5" strokeWidth={1.6} /> : <Menu className="size-5" strokeWidth={1.6} />}
           </button>
@@ -166,19 +179,19 @@ export function Header({
         id="mobile-menu"
         ref={panel}
         hidden={!open}
-        className="h-[calc(100dvh-4rem)] overflow-y-auto border-t border-white/[0.07] bg-obsidian px-4 pb-10 pt-6 sm:px-6 lg:hidden"
+        className="h-[calc(100dvh-4rem)] overflow-y-auto border-t border-line bg-paper px-4 pb-10 pt-6 sm:px-6 lg:hidden"
       >
         <nav aria-label={nav.mobile}>
           <ul className="flex flex-col">
             {nav.links.map((link, i) => (
-              <li key={link.href} className="border-b border-white/[0.07]">
+              <li key={link.href} className="border-b border-line">
                 <a
                   href={navHref(link.href)}
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-between py-5 font-display text-2xl text-silver-100"
+                  className="flex items-center justify-between py-5 font-display text-2xl font-semibold text-navy"
                 >
                   {link.label}
-                  <span dir="ltr" className="text-xs tabular-nums text-silver-600">
+                  <span dir="ltr" className="text-xs tabular-nums text-brand-red">
                     0{i + 1}
                   </span>
                 </a>
@@ -186,27 +199,27 @@ export function Header({
             ))}
           </ul>
         </nav>
-        <LanguageSwitcher lang={lang} path={path} label={nav.language} size="full" className="mt-8" />
+        <LanguageSwitcher lang={lang} path={path} label={nav.language} size="full" tone="onLight" className="mt-8" />
         <div className="mt-4 grid gap-3">
           <a
             href={whatsappHref(message)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-14 items-center justify-center gap-3 rounded-[3px] bg-emerald-brand font-medium text-white"
+            className="inline-flex h-14 items-center justify-center gap-3 rounded-[3px] bg-brand-red font-medium text-white"
           >
             <WhatsAppIcon className="size-5" />
             {common.whatsappCta}
           </a>
           <a
             href={TEL_HREF}
-            className="inline-flex h-14 items-center justify-center gap-3 rounded-[3px] border border-white/20 font-medium text-silver-100"
+            className="inline-flex h-14 items-center justify-center gap-3 rounded-[3px] border border-brand-blue font-medium text-brand-blue"
           >
             <Phone className="size-[18px]" strokeWidth={1.6} aria-hidden="true" />
             {common.call}
-            <span dir="ltr" className="tabular-nums text-silver-500">{PHONE_DISPLAY}</span>
+            <span dir="ltr" className="tabular-nums opacity-75">{PHONE_DISPLAY}</span>
           </a>
         </div>
-        <p className="mt-10 text-sm text-silver-500">
+        <p className="mt-10 text-sm text-slate">
           {common.location.a} • {common.location.b}
         </p>
       </div>

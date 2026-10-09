@@ -10,24 +10,24 @@ export function Faq({ dict }: { dict: Dictionary["faq"] }) {
   const baseId = useId();
 
   return (
-    <section aria-labelledby="faq-title" className="border-t border-white/[0.06] bg-obsidian py-24 sm:py-32">
+    <section aria-labelledby="faq-title" className="border-t border-line bg-paper py-24 sm:py-32">
       <div className="mx-auto grid max-w-7xl gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:gap-10 lg:px-10">
         <Reveal className="lg:col-span-4">
           <SectionEyebrow index="06">{dict.eyebrow}</SectionEyebrow>
-          <h2 id="faq-title" className="mt-6 text-balance font-display text-4xl font-bold leading-[1.25] text-white sm:text-5xl">
+          <h2 id="faq-title" className="mt-6 text-balance font-display text-4xl font-bold leading-[1.25] text-navy sm:text-5xl">
             {dict.title}
           </h2>
-          <p className="mt-6 max-w-sm text-base leading-8 text-silver-500">{dict.intro}</p>
+          <p className="mt-6 max-w-sm text-base leading-8 text-slate">{dict.intro}</p>
         </Reveal>
 
         <Reveal delay={0.1} className="lg:col-span-8">
-          <ul className="border-t border-white/10">
+          <ul className="border-t border-line">
             {dict.items.map((item, i) => {
               const isOpen = open === i;
               const buttonId = `${baseId}-q-${i}`;
               const panelId = `${baseId}-a-${i}`;
               return (
-                <li key={item.q} className="border-b border-white/10">
+                <li key={item.q} className="border-b border-line">
                   <h3>
                     <button
                       id={buttonId}
@@ -35,12 +35,12 @@ export function Faq({ dict }: { dict: Dictionary["faq"] }) {
                       aria-expanded={isOpen}
                       aria-controls={panelId}
                       onClick={() => setOpen(isOpen ? null : i)}
-                      className="flex w-full items-center justify-between gap-6 py-7 text-start font-display text-lg font-medium text-white transition-colors hover:text-silver-300 sm:text-xl"
+                      className="flex w-full items-center justify-between gap-6 py-7 text-start font-display text-lg font-semibold text-navy transition-colors hover:text-brand-blue sm:text-xl"
                     >
                       {item.q}
                       <span
                         className={`flex size-9 shrink-0 items-center justify-center rounded-full border transition-[transform,border-color,background-color] duration-500 ease-out-expo ${
-                          isOpen ? "rotate-45 border-emerald-brand bg-emerald-brand/15" : "border-white/15"
+                          isOpen ? "rotate-45 border-brand-red bg-brand-red text-white" : "border-brand-blue/30 text-brand-blue"
                         }`}
                         aria-hidden="true"
                       >
@@ -58,7 +58,7 @@ export function Faq({ dict }: { dict: Dictionary["faq"] }) {
                     inert={!isOpen}
                   >
                     <div className="overflow-hidden">
-                      <p className="max-w-2xl pb-8 text-base leading-8 text-silver-500">{item.a}</p>
+                      <p className="max-w-2xl pb-8 text-base leading-8 text-slate">{item.a}</p>
                     </div>
                   </div>
                 </li>

@@ -31,3 +31,15 @@ export function BrandMark(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+/** WhatsApp's recognizable app mark: white glyph on the official green (#25D366) circle. */
+export function WhatsAppLogo({ className = "" }: { className?: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`inline-flex items-center justify-center rounded-full bg-whatsapp text-white shadow-[inset_0_-2px_0_rgb(0_0_0/0.12)] ${className}`}
+    >
+      <WhatsAppIcon className="size-[58%]" />
+    </span>
+  );
+}

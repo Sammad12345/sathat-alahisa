@@ -2,58 +2,54 @@
 
 import { useEffect, useState } from "react";
 import { WhatsAppIcon } from "@/components/icons";
-import { whatsappHref } from "@/lib/site";
+import { WHATSAPP_NUMBER } from "@/lib/site";
 
 /**
- * Appears once the hero (which has its own CTA) is scrolled past, and hides
- * again over the closing contact section and footer so it never covers them.
+ * Fixed WhatsApp button, bottom-right in both RTL and LTR. Visible throughout the page,
+ * stepping aside only while the request form is on screen so it never covers form controls.
  */
-export function FloatingWhatsApp({ label, message }: { label: string; message: string }) {
-  const [visible, setVisible] = useState(false);
+export function FloatingWhatsApp({
+  label,
+  tooltip,
+  greeting,
+}: {
+  label: string;
+  tooltip: string;
+  greeting: string;
+}) {
+  const [overForm, setOverForm] = useState(false);
 
   useEffect(() => {
-    const hero = document.getElementById("top");
-    const contact = document.getElementById("contact");
-    const footer = document.querySelector("footer");
-    const state = { pastHero: false, overEnd: new Set<Element>() };
-
-    const update = () => setVisible(state.pastHero && state.overEnd.size === 0);
-
-    const heroObserver = new IntersectionObserver(([entry]) => {
-      state.pastHero = !entry.isIntersecting;
-      update();
-    }, { rootMargin: "-40% 0px 0px 0px" });
-
-    const endObserver = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        if (e.isIntersecting) state.overEnd.add(e.target);
-        else state.overEnd.delete(e.target);
-      }
-      update();
-    });
-
-    if (hero) heroObserver.observe(hero);
-    if (contact) endObserver.observe(contact);
-    if (footer) endObserver.observe(footer);
-    return () => {
-      heroObserver.disconnect();
-      endObserver.disconnect();
-    };
+    const form = document.querySelector("#request form");
+    if (!form) return;
+    const io = new IntersectionObserver(([entry]) => setOverForm(entry.isIntersecting));
+    io.observe(form);
+    return () => io.disconnect();
   }, []);
+
+  const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(greeting)}`;
 
   return (
     <a
-      href={whatsappHref(message)}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      aria-hidden={!visible}
-      tabIndex={visible ? 0 : -1}
-      className={`fixed bottom-5 end-5 z-40 flex size-14 items-center justify-center rounded-full border border-white/15 bg-emerald-brand text-white shadow-[0_12px_32px_-10px_rgb(0_0_0/0.8)] transition-[opacity,transform,background-color] duration-500 ease-out-expo hover:bg-emerald-bright sm:bottom-8 sm:end-8 ${
-        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
+      aria-hidden={overForm || undefined}
+      tabIndex={overForm ? -1 : 0}
+      className={`group fixed bottom-5 right-5 z-40 flex size-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-[0_14px_30px_-10px_rgb(0_0_0/0.45)] transition-[opacity,transform,box-shadow] duration-500 ease-out-expo hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-10px_rgb(0_0_0/0.5)] active:scale-95 sm:bottom-8 sm:right-8 sm:size-16 ${
+        overForm ? "pointer-events-none translate-y-3 opacity-0" : "opacity-100"
       }`}
     >
-      <WhatsAppIcon className="size-7" />
+      {/* Soft breathing ring (disabled under reduced motion) */}
+      <span aria-hidden="true" className="wa-ring absolute inset-0 rounded-full bg-whatsapp" />
+      <WhatsAppIcon className="relative size-7 sm:size-8" />
+      <span
+        role="tooltip"
+        className="pointer-events-none absolute right-full top-1/2 me-0 mr-3 hidden -translate-y-1/2 whitespace-nowrap rounded-[3px] bg-ink px-3 py-1.5 text-xs font-medium text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 sm:block"
+      >
+        {tooltip}
+      </span>
     </a>
   );
 }

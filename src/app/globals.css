@@ -14,6 +14,21 @@
   --color-emerald-bright: #2fbf75;
   --color-emerald-deep: #0f5c37;
 
+  /* Brand palette: red for primary actions, blue for brand/navigation/headings,
+     black for selective contrast, white and light gray for reading surfaces. */
+  --color-brand-red: #d71920;
+  --color-brand-red-dark: #b0131a;
+  --color-brand-blue: #1450b4;
+  --color-brand-blue-dark: #0d3d8c;
+  --color-navy: #0b2a5b;
+  --color-ink: #0a0c10;
+  --color-paper: #ffffff;
+  --color-mist: #f3f5f9;
+  --color-line: #e2e7ef;
+  --color-slate: #4a5568;
+  --color-slate-light: #6b7686;
+  --color-whatsapp: #25d366;
+
   --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-alexandria), var(--font-plex), ui-sans-serif, sans-serif;
 
@@ -21,11 +36,11 @@
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html {
-  background: var(--color-obsidian);
+  background: var(--color-paper);
   scroll-padding-top: 5.5rem;
   -webkit-text-size-adjust: 100%;
 }
@@ -37,20 +52,20 @@ html {
 }
 
 body {
-  background: var(--color-obsidian);
-  color: var(--color-silver-100);
+  background: var(--color-paper);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
   overflow-x: clip;
 }
 
 ::selection {
-  background: var(--color-emerald-deep);
+  background: var(--color-brand-blue);
   color: #fff;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-emerald-bright);
+  outline: 2px solid var(--color-brand-blue);
   outline-offset: 3px;
 }
 
@@ -133,6 +148,28 @@ body {
   }
 }
 
+@keyframes hero-parallax {
+  from {
+    transform: translateY(0) scale(1.06);
+  }
+  to {
+    transform: translateY(14%) scale(1.14);
+  }
+}
+
+/* Floating WhatsApp: a soft ring that breathes out every few seconds */
+@keyframes wa-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .animate-rise {
     animation: rise 1s var(--ease-out-expo) var(--d, 0s) both;
@@ -143,7 +180,17 @@ body {
   }
 
   /* Gentle hero drift tied to page scroll, where scroll-driven animations are supported */
+  .wa-ring {
+    animation: wa-ring 2.8s ease-out 1.5s infinite;
+  }
+
   @supports (animation-timeline: scroll()) {
+    .hero-parallax {
+      animation: hero-parallax linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+
     .scroll-drift {
       animation: drift linear both;
       animation-timeline: scroll(root);

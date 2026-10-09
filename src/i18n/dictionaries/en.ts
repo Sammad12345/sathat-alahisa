@@ -21,6 +21,7 @@ export const en: Dictionary = {
     location: { a: "Al-Ahsa", b: "Al-Hofuf" },
     whatsapp: "WhatsApp",
     whatsappCta: "Message us on WhatsApp",
+    whatsappTooltip: "Contact us on WhatsApp",
     callNow: "Call us now",
     call: "Call us",
     newTab: "(opens WhatsApp in a new tab)",
@@ -41,6 +42,7 @@ export const en: Dictionary = {
     language: "Choose language",
   },
   messages: {
+    greeting: "Hello, I'd like to ask about your flatbed service.",
     general:
       "Hello, I need a flatbed tow truck in Al-Ahsa. I'd like to have my car transported — I'll send you my location and the car details.",
     request: [
@@ -61,9 +63,7 @@ export const en: Dictionary = {
     title: ["The flatbed you need,", "when you need it"],
     subtitle: "Moving your car starts with one call",
     body: "Car towing and transport across Al-Ahsa and Al-Hofuf, made simple. Message us on WhatsApp with your location and your car's details.",
-    imageAlt: "Our red flatbed carrying a white pickup along a palm-lined road",
-    photoCaption: "Our work",
-    formLink: "Or send your request with the form",
+    imageAlt: "A modern flatbed tow truck with a warning light bar on its roof",
     specs: [
       { label: "Coverage", value: "Within Al-Ahsa and Al-Hofuf" },
       { label: "Further afield", value: "Other cities by arrangement" },
@@ -95,7 +95,7 @@ export const en: Dictionary = {
       {
         title: "Flatbed car transport",
         text: "Your car rides fully loaded on the flatbed instead of being driven — ideal for cars that won't run or shouldn't be driven.",
-        alt: "Our flatbed carrying a grey sedan through the city",
+        alt: "Our flatbed carrying a white pickup truck on the road",
       },
       {
         title: "Accident vehicle transport",
@@ -135,11 +135,11 @@ export const en: Dictionary = {
   gallery: {
     eyebrow: "On the road",
     title: "The details that matter, every trip",
-    note: "Photos from our own jobs, alongside illustrative images.",
+    note: "Photos from our own jobs, plus one illustrative image.",
     items: [
-      { caption: "Illustrative: the loading deck", alt: "A silver car's wheel on the perforated metal deck of a flatbed in a workshop" },
+      { caption: "Our work: a city transport", alt: "Our red flatbed carrying a grey sedan on a city street" },
       { caption: "Our work: secured on the deck", alt: "A white luxury sedan secured on our red flatbed deck" },
-      { caption: "Illustrative: ready for the road", alt: "The front of a modern flatbed tow truck with a warning light bar" },
+      { caption: "Illustrative: the loading deck", alt: "A silver car's wheel on the perforated metal deck of a flatbed in a workshop" },
       { caption: "Our work: a car on the flatbed", alt: "A grey Hyundai loaded on our flatbed" },
     ],
   },
@@ -248,6 +248,7 @@ export const en: Dictionary = {
     intro:
       "Some photos on this site are from our own jobs; others are illustrative images of flatbed and transport services and do not show our vehicles. The illustrative images have been cropped and color-graded and are used under the licenses listed below.",
     uses: {
+      hero: "Hero section",
       breakdown: "Broken-down car towing",
       accident: "Accident vehicle transport",
       intercity: "Transport between locations & cities",
