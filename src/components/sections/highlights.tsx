@@ -24,7 +24,7 @@ export function Highlights({ dict }: { dict: Dictionary["highlights"] }) {
                   0{i + 1}
                 </span>
               </div>
-              <h3 className="mt-8 font-display text-lg font-semibold text-navy">{title}</h3>
+              <h3 className="mt-8 font-display text-lg font-semibold text-brand-blue">{title}</h3>
               <p className="mt-3 text-[15px] leading-7 text-slate">{text}</p>
             </Reveal>
           );

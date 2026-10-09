@@ -3,7 +3,7 @@
 import { Menu, Phone, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { BrandMark, WhatsAppIcon, WhatsAppLogo } from "@/components/icons";
-import { LanguageSwitcher } from "@/components/language-switcher";
+import { LanguageDropdown, LanguageSwitcher } from "@/components/language-switcher";
 import { type Locale, localePath } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/ar";
 import { BUSINESS_NAME, PHONE_DISPLAY, TEL_HREF, WHATSAPP_NUMBER, whatsappHref } from "@/lib/site";
@@ -84,13 +84,21 @@ export function Header({
   // Light (white) bar once scrolled, when the menu is open, or on pages without a dark hero.
   const light = scrolled || open || !overlay;
   // Top-right in both directions: beside the brand in RTL, in the action group in LTR.
-  const switcher = <LanguageSwitcher lang={lang} path={path} label={nav.language} tone={light ? "onLight" : "onDark"} />;
+  const switcher = (
+    <LanguageDropdown
+      lang={lang}
+      path={path}
+      label={nav.language}
+      tone={light ? "onLight" : "onDark"}
+      align={lang === "ar" ? "start" : "end"}
+    />
+  );
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ${
         light
-          ? "border-b border-line bg-paper/95 shadow-[0_8px_24px_-18px_rgb(11_42_91/0.35)] backdrop-blur-xl"
+          ? "border-b border-line bg-paper/95 shadow-[0_8px_24px_-18px_rgb(21_101_192/0.35)] backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -109,7 +117,7 @@ export function Header({
         <div className="flex min-w-0 items-center gap-3 sm:gap-5">
           <a
             href={path === "/" ? "#top" : home}
-            className={`flex min-w-0 items-center gap-3 transition-colors duration-500 ${light ? "text-navy" : "text-white"}`}
+            className={`flex min-w-0 items-center gap-3 transition-colors duration-500 ${light ? "text-brand-blue" : "text-white"}`}
             aria-label={`${BUSINESS_NAME} — ${common.home}`}
           >
             <BrandMark className={`hidden size-9 shrink-0 transition-colors duration-500 min-[400px]:block ${light ? "text-brand-blue" : "text-white"}`} />
@@ -130,7 +138,7 @@ export function Header({
                   aria-current={active === link.href ? "location" : undefined}
                   className={`relative py-2 text-[15px] font-medium transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-[right] after:scale-x-0 after:transition-transform after:duration-500 hover:after:scale-x-100 aria-[current=location]:after:scale-x-100 ltr:after:origin-[left] ${
                     light
-                      ? "text-navy/80 after:bg-brand-blue hover:text-brand-blue aria-[current=location]:text-brand-blue"
+                      ? "text-ink/80 after:bg-brand-blue hover:text-brand-blue aria-[current=location]:text-brand-blue"
                       : "text-white/85 after:bg-white hover:text-white aria-[current=location]:text-white"
                   }`}
                 >
@@ -167,7 +175,7 @@ export function Header({
             aria-controls="mobile-menu"
             aria-label={open ? nav.close : nav.open}
             className={`inline-flex size-10 items-center justify-center rounded-[3px] border transition-colors lg:hidden ${
-              light ? "border-line text-navy hover:border-brand-blue" : "border-white/30 text-white hover:border-white/60"
+              light ? "border-line text-brand-blue hover:border-brand-blue" : "border-white/30 text-white hover:border-white/60"
             }`}
           >
             {open ? <X className="size-5" strokeWidth={1.6} /> : <Menu className="size-5" strokeWidth={1.6} />}
@@ -188,7 +196,7 @@ export function Header({
                 <a
                   href={navHref(link.href)}
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-between py-5 font-display text-2xl font-semibold text-navy"
+                  className="flex items-center justify-between py-5 font-display text-2xl font-semibold text-brand-blue"
                 >
                   {link.label}
                   <span dir="ltr" className="text-xs tabular-nums text-brand-red">
@@ -199,7 +207,7 @@ export function Header({
             ))}
           </ul>
         </nav>
-        <LanguageSwitcher lang={lang} path={path} label={nav.language} size="full" tone="onLight" className="mt-8" />
+        <LanguageSwitcher lang={lang} path={path} label={nav.language} tone="onLight" className="mt-8" />
         <div className="mt-4 grid gap-3">
           <a
             href={whatsappHref(message)}

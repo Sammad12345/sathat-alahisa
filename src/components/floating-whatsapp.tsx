@@ -6,7 +6,8 @@ import { WHATSAPP_NUMBER } from "@/lib/site";
 
 /**
  * Fixed WhatsApp button, bottom-right in both RTL and LTR. Visible throughout the page,
- * stepping aside only while the request form is on screen so it never covers form controls.
+ * stepping aside only where it would cover controls: the request form, and (on phones)
+ * the hero's own full-width WhatsApp/call buttons.
  */
 export function FloatingWhatsApp({
   label,
@@ -18,14 +19,27 @@ export function FloatingWhatsApp({
   greeting: string;
 }) {
   const [overForm, setOverForm] = useState(false);
+  const [overHeroCtas, setOverHeroCtas] = useState(false);
 
   useEffect(() => {
+    const observers: IntersectionObserver[] = [];
     const form = document.querySelector("#request form");
-    if (!form) return;
-    const io = new IntersectionObserver(([entry]) => setOverForm(entry.isIntersecting));
-    io.observe(form);
-    return () => io.disconnect();
+    if (form) {
+      const io = new IntersectionObserver(([entry]) => setOverForm(entry.isIntersecting));
+      io.observe(form);
+      observers.push(io);
+    }
+    const heroCtas = document.getElementById("hero-ctas");
+    const phone = window.matchMedia("(max-width: 639px)");
+    if (heroCtas) {
+      const io = new IntersectionObserver(([entry]) => setOverHeroCtas(entry.isIntersecting && phone.matches));
+      io.observe(heroCtas);
+      observers.push(io);
+    }
+    return () => observers.forEach((io) => io.disconnect());
   }, []);
+
+  const hidden = overForm || overHeroCtas;
 
   const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(greeting)}`;
 
@@ -35,10 +49,10 @@ export function FloatingWhatsApp({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      aria-hidden={overForm || undefined}
-      tabIndex={overForm ? -1 : 0}
+      aria-hidden={hidden || undefined}
+      tabIndex={hidden ? -1 : 0}
       className={`group fixed bottom-5 right-5 z-40 flex size-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-[0_14px_30px_-10px_rgb(0_0_0/0.45)] transition-[opacity,transform,box-shadow] duration-500 ease-out-expo hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-10px_rgb(0_0_0/0.5)] active:scale-95 sm:bottom-8 sm:right-8 sm:size-16 ${
-        overForm ? "pointer-events-none translate-y-3 opacity-0" : "opacity-100"
+        hidden ? "pointer-events-none translate-y-3 opacity-0" : "opacity-100"
       }`}
     >
       {/* Soft breathing ring (disabled under reduced motion) */}

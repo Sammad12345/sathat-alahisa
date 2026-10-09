@@ -8,7 +8,7 @@ export function WhyUs({ dict }: { dict: Dictionary["why"] }) {
         <div className="lg:col-span-5">
           <Reveal className="lg:sticky lg:top-32">
             <SectionEyebrow index="02">{dict.eyebrow}</SectionEyebrow>
-            <h2 id="why-title" className="mt-6 text-balance font-display text-4xl font-bold leading-[1.3] text-navy sm:text-5xl sm:leading-[1.25]">
+            <h2 id="why-title" className="mt-6 text-balance font-display text-4xl font-bold leading-[1.3] text-brand-blue sm:text-5xl sm:leading-[1.25]">
               {dict.title[0]}
               <br />
               <span className="text-brand-blue">{dict.title[1]}</span>
@@ -29,7 +29,7 @@ export function WhyUs({ dict }: { dict: Dictionary["why"] }) {
                 0{i + 1}
               </span>
               <div>
-                <h3 className="font-display text-xl font-semibold text-navy sm:text-2xl">{r.title}</h3>
+                <h3 className="font-display text-xl font-semibold text-brand-blue sm:text-2xl">{r.title}</h3>
                 <p className="mt-3 max-w-lg text-[15px] leading-8 text-slate sm:text-base">{r.text}</p>
               </div>
             </Reveal>

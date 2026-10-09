@@ -19,7 +19,7 @@ export function Process({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <Reveal className="max-w-3xl">
           <SectionEyebrow index="03">{dict.eyebrow}</SectionEyebrow>
-          <h2 id="process-title" className="mt-6 text-balance font-display text-4xl font-bold leading-[1.25] text-navy sm:text-5xl">
+          <h2 id="process-title" className="mt-6 text-balance font-display text-4xl font-bold leading-[1.25] text-brand-blue sm:text-5xl">
             {dict.title}
           </h2>
         </Reveal>
@@ -40,7 +40,7 @@ export function Process({
                   <p dir="ltr" className="text-end font-display text-sm tabular-nums tracking-widest text-brand-red md:text-start ltr:text-start">
                     <span className="sr-only">{dict.step} </span>0{i + 1}
                   </p>
-                  <h3 className="mt-2 font-display text-2xl font-semibold text-navy sm:text-[1.75rem]">{title}</h3>
+                  <h3 className="mt-2 font-display text-2xl font-semibold text-brand-blue sm:text-[1.75rem]">{title}</h3>
                   <p className="mt-3 max-w-xs text-base leading-8 text-slate">{text}</p>
                 </div>
               </Reveal>

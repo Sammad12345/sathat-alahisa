@@ -30,15 +30,15 @@ export function Footer({
             <BrandMark className="size-10 text-white" />
             <p lang="ar" className="font-display text-lg font-semibold text-white">{BUSINESS_NAME}</p>
           </div>
-          <p className="mt-6 max-w-sm text-[15px] leading-8 text-silver-500">{dict.about}</p>
+          <p className="mt-6 max-w-sm text-[15px] leading-8 text-white/65">{dict.about}</p>
         </div>
 
         <nav aria-label={dict.navLabel} className="md:col-span-3">
-          <h2 className="text-xs tracking-wide text-silver-500">{dict.pageHeading}</h2>
+          <h2 className="text-xs tracking-wide text-white/65">{dict.pageHeading}</h2>
           <ul className="mt-5 space-y-3">
             {nav.links.map((link) => (
               <li key={link.href}>
-                <a href={onHome ? link.href : `${home}${link.href}`} className="text-[15px] text-silver-300 transition-colors hover:text-white">
+                <a href={onHome ? link.href : `${home}${link.href}`} className="text-[15px] text-white/80 transition-colors hover:text-white">
                   {link.label}
                 </a>
               </li>
@@ -47,10 +47,10 @@ export function Footer({
         </nav>
 
         <div className="md:col-span-4">
-          <h2 className="text-xs tracking-wide text-silver-500">{dict.contactHeading}</h2>
+          <h2 className="text-xs tracking-wide text-white/65">{dict.contactHeading}</h2>
           <ul className="mt-5 space-y-4">
             <li>
-              <a href={TEL_HREF} className="inline-flex items-center gap-3 text-[15px] text-silver-300 transition-colors hover:text-white">
+              <a href={TEL_HREF} className="inline-flex items-center gap-3 text-[15px] text-white/80 transition-colors hover:text-white">
                 <Phone className="size-4 text-brand-red" strokeWidth={1.6} aria-hidden="true" />
                 <span dir="ltr" className="tabular-nums">{PHONE_DISPLAY}</span>
               </a>
@@ -60,28 +60,28 @@ export function Footer({
                 href={whatsappHref(message)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 text-[15px] text-silver-300 transition-colors hover:text-white"
+                className="inline-flex items-center gap-3 text-[15px] text-white/80 transition-colors hover:text-white"
               >
                 <WhatsAppIcon className="size-4 text-whatsapp" />
                 {common.whatsappCta}
                 <span className="sr-only">{common.newTabShort}</span>
               </a>
             </li>
-            <li className="text-[15px] leading-7 text-silver-500">
+            <li className="text-[15px] leading-7 text-white/65">
               {dict.area}
               <br />
-              <span className="text-sm text-silver-500">{dict.areaNote}</span>
+              <span className="text-sm text-white/65">{dict.areaNote}</span>
             </li>
           </ul>
         </div>
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 pb-28 pt-6 text-xs text-silver-500 sm:flex-row sm:pb-6 sm:items-center sm:justify-between sm:px-6 lg:px-10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 pb-28 pt-6 text-xs text-white/65 sm:flex-row sm:pb-6 sm:items-center sm:justify-between sm:px-6 lg:px-10">
           <p>
             © <CurrentYear /> <span lang="ar">{BUSINESS_NAME}</span>. {dict.rights}
           </p>
-          <a href={localePath(lang, "/credits")} className="transition-colors hover:text-silver-300">
+          <a href={localePath(lang, "/credits")} className="transition-colors hover:text-white/80">
             {dict.credits}
           </a>
         </div>

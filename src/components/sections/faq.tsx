@@ -14,7 +14,7 @@ export function Faq({ dict }: { dict: Dictionary["faq"] }) {
       <div className="mx-auto grid max-w-7xl gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:gap-10 lg:px-10">
         <Reveal className="lg:col-span-4">
           <SectionEyebrow index="06">{dict.eyebrow}</SectionEyebrow>
-          <h2 id="faq-title" className="mt-6 text-balance font-display text-4xl font-bold leading-[1.25] text-navy sm:text-5xl">
+          <h2 id="faq-title" className="mt-6 text-balance font-display text-4xl font-bold leading-[1.25] text-brand-blue sm:text-5xl">
             {dict.title}
           </h2>
           <p className="mt-6 max-w-sm text-base leading-8 text-slate">{dict.intro}</p>
@@ -35,7 +35,7 @@ export function Faq({ dict }: { dict: Dictionary["faq"] }) {
                       aria-expanded={isOpen}
                       aria-controls={panelId}
                       onClick={() => setOpen(isOpen ? null : i)}
-                      className="flex w-full items-center justify-between gap-6 py-7 text-start font-display text-lg font-semibold text-navy transition-colors hover:text-brand-blue sm:text-xl"
+                      className="flex w-full items-center justify-between gap-6 py-7 text-start font-display text-lg font-semibold text-brand-blue transition-colors hover:text-brand-blue sm:text-xl"
                     >
                       {item.q}
                       <span

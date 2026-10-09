@@ -1,32 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-obsidian: #08090b;
-  --color-graphite-950: #0e1013;
-  --color-graphite-900: #14171b;
-  --color-graphite-800: #1d2126;
-  --color-graphite-700: #2a2f36;
-  --color-silver-100: #eef0f3;
-  --color-silver-300: #c7ccd3;
-  --color-silver-500: #9aa1ab;
-  --color-silver-600: #79808a;
-  --color-emerald-brand: #1f9d5c;
-  --color-emerald-bright: #2fbf75;
-  --color-emerald-deep: #0f5c37;
-
-  /* Brand palette: red for primary actions, blue for brand/navigation/headings,
-     black for selective contrast, white and light gray for reading surfaces. */
-  --color-brand-red: #d71920;
-  --color-brand-red-dark: #b0131a;
-  --color-brand-blue: #1450b4;
-  --color-brand-blue-dark: #0d3d8c;
-  --color-navy: #0b2a5b;
-  --color-ink: #0a0c10;
+  /* Brand palette — the only colors used across the site.
+     Red: primary actions & key highlights · Blue: brand, navigation, headings, secondary elements
+     Black: text, selected premium sections, footer · White & light gray: backgrounds and cards. */
+  --color-brand-red: #e53935;
+  --color-brand-red-dark: #c62828; /* hover / small text on white */
+  --color-brand-blue: #1565c0;
+  --color-brand-blue-dark: #0d47a1; /* hover */
+  --color-ink: #171717;
   --color-paper: #ffffff;
-  --color-mist: #f3f5f9;
-  --color-line: #e2e7ef;
-  --color-slate: #4a5568;
-  --color-slate-light: #6b7686;
+  --color-mist: #f5f7fa;
+
+  /* Neutrals derived from the black, plus a light-gray rule for borders */
+  --color-slate: #4f4f4f; /* body text: black at ~75% on white */
+  --color-slate-light: #6f6f6f; /* secondary text: black at ~62% */
+  --color-line: #e4e8ee;
+
+  /* WhatsApp's official green, used only on WhatsApp marks */
   --color-whatsapp: #25d366;
 
   --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
@@ -70,30 +61,8 @@ body {
 }
 
 @layer components {
-  /* Thin hairline used for editorial dividers */
-  .hairline {
-    background: linear-gradient(
-      to left,
-      transparent,
-      rgb(255 255 255 / 0.14) 20%,
-      rgb(255 255 255 / 0.14) 80%,
-      transparent
-    );
-    height: 1px;
-  }
 
-  /* Brushed-metal text treatment for select display words */
-  .text-metal {
-    background: linear-gradient(180deg, #ffffff 0%, #d9dde3 45%, #8e959f 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
 
-  /* Cinematic grading applied to editorial photography */
-  .grade {
-    filter: saturate(0.78) contrast(1.06) brightness(0.92);
-  }
 
   .grain::after {
     content: "";

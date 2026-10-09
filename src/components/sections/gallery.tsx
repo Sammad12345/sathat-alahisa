@@ -41,7 +41,7 @@ export function Gallery({ dict }: { dict: Dictionary["gallery"] }) {
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <Reveal>
             <SectionEyebrow index="04">{dict.eyebrow}</SectionEyebrow>
-            <h2 id="gallery-title" className="mt-6 text-balance font-display text-4xl font-bold leading-[1.25] text-navy sm:text-5xl">
+            <h2 id="gallery-title" className="mt-6 text-balance font-display text-4xl font-bold leading-[1.25] text-brand-blue sm:text-5xl">
               {dict.title}
             </h2>
           </Reveal>
@@ -52,14 +52,14 @@ export function Gallery({ dict }: { dict: Dictionary["gallery"] }) {
 
         <div className="mt-14 grid gap-3 sm:mt-16 md:auto-rows-[minmax(15rem,1fr)] md:grid-cols-12 md:gap-4 lg:auto-rows-[18rem]">
           {dict.items.map((item, i) => (
-            <Reveal as="figure" key={item.caption} delay={i * 0.08} className={`group relative overflow-hidden bg-line shadow-[0_18px_40px_-28px_rgb(11_42_91/0.55)] ${tiles[i].className}`}>
+            <Reveal as="figure" key={item.caption} delay={i * 0.08} className={`group relative overflow-hidden bg-line shadow-[0_18px_40px_-28px_rgb(21_101_192/0.55)] ${tiles[i].className}`}>
               <Image
                 src={tiles[i].image}
                 alt={item.alt}
                 fill
                 placeholder="blur"
                 sizes={tiles[i].sizes}
-                className={`grade object-cover transition-transform duration-[1600ms] ease-out-expo group-hover:scale-[1.05] ${tiles[i].position ?? ""}`}
+                className={`object-cover transition-transform duration-[1600ms] ease-out-expo group-hover:scale-[1.05] ${tiles[i].position ?? ""}`}
               />
               <div className="absolute inset-0 bg-linear-to-t from-ink/80 via-ink/5 to-transparent" />
               <figcaption className="absolute bottom-0 start-0 flex items-center gap-3 p-5 text-sm font-medium text-white sm:p-6">

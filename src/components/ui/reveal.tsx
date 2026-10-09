@@ -60,14 +60,14 @@ export function SectionEyebrow({
   index: string;
   children: ReactNode;
   /** Surface the eyebrow sits on. */
-  tone?: "light" | "dark";
+  tone?: "light" | "dark" | "brand";
 }) {
   return (
-    <p className={`flex items-center gap-3 text-[13px] font-medium tracking-wide ${tone === "light" ? "text-slate" : "text-silver-300"}`}>
-      <span dir="ltr" className="font-display tabular-nums text-brand-red">
+    <p className={`flex items-center gap-3 text-[13px] font-medium tracking-wide ${tone === "light" ? "text-slate" : "text-white/85"}`}>
+      <span dir="ltr" className={`font-display tabular-nums ${tone === "brand" ? "text-white" : "text-brand-red"}`}>
         {index}
       </span>
-      <span className={`h-px w-8 ${tone === "light" ? "bg-brand-blue/30" : "bg-white/30"}`} aria-hidden="true" />
+      <span className={`h-0.5 w-8 ${tone === "light" ? "bg-brand-blue" : tone === "brand" ? "bg-white/50" : "bg-brand-blue"}`} aria-hidden="true" />
       <span>{children}</span>
     </p>
   );

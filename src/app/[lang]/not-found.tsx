@@ -12,7 +12,7 @@ export default async function NotFound() {
     <main className="relative isolate flex min-h-dvh bg-mist flex-col items-center justify-center px-4 text-center">
       <BrandMark className="size-12 text-brand-blue" />
       <p dir="ltr" className="mt-10 font-display text-sm tabular-nums tracking-[0.3em] text-brand-red">404</p>
-      <h1 className="mt-4 font-display text-4xl font-bold text-navy sm:text-5xl">{t.title}</h1>
+      <h1 className="mt-4 font-display text-4xl font-bold text-brand-blue sm:text-5xl">{t.title}</h1>
       <p className="mt-5 max-w-md text-base leading-8 text-slate">{t.body}</p>
       <a
         href={localePath(lang)}

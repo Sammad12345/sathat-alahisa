@@ -120,7 +120,7 @@ export function ContactForm({
     return (
       <div role="status" className="flex min-h-[28rem] flex-col items-start justify-center gap-6 py-6">
         <CheckCircle2 className="size-12 text-brand-blue" strokeWidth={1.2} aria-hidden="true" />
-        <h3 className="font-display text-3xl font-semibold text-navy">{dict.success.title}</h3>
+        <h3 className="font-display text-3xl font-semibold text-brand-blue">{dict.success.title}</h3>
         <p className="max-w-md text-base leading-8 text-slate">{dict.success.body}</p>
         <button
           type="button"
@@ -139,12 +139,12 @@ export function ContactForm({
   const fieldClass = (f: ContactField) =>
     `${inputBase} ${
       errors[f]
-        ? "border-red-600 focus:shadow-[0_0_0_3px_rgb(220_38_38/0.18)]"
-        : "border-line hover:border-slate-light/60 focus:border-brand-blue focus:shadow-[0_0_0_3px_rgb(20_80_180/0.18)]"
+        ? "border-brand-red focus:shadow-[0_0_0_3px_rgb(229_57_53/0.18)]"
+        : "border-line hover:border-slate-light/60 focus:border-brand-blue focus:shadow-[0_0_0_3px_rgb(21_101_192/0.18)]"
     }`;
 
   const renderLabel = (field: ContactField) => (
-    <label htmlFor={id(field)} className="mb-2 flex items-center gap-1.5 text-[13px] font-semibold text-navy">
+    <label htmlFor={id(field)} className="mb-2 flex items-center gap-1.5 text-[13px] font-semibold text-ink">
       {dict.fields[field].label}
       {isRequired(field) && (
         <span className="text-brand-red" aria-hidden="true">
@@ -157,7 +157,7 @@ export function ContactForm({
 
   const renderError = (field: ContactField) =>
     errors[field] ? (
-      <p id={id(`${field}-error`)} className="mt-2 flex items-center gap-1.5 text-[13px] font-medium text-red-700">
+      <p id={id(`${field}-error`)} className="mt-2 flex items-center gap-1.5 text-[13px] font-medium text-brand-red-dark">
         <AlertCircle className="size-3.5 shrink-0" aria-hidden="true" />
         {dict.errors[errors[field]!]}
       </p>
@@ -192,7 +192,7 @@ export function ContactForm({
 
       <div aria-live="assertive" className="empty:hidden">
         {summary && Object.values(errors).some(Boolean) && (
-          <p className="mb-6 flex items-center gap-2 rounded-[3px] border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-800">
+          <p className="mb-6 flex items-center gap-2 rounded-[3px] border border-brand-red/30 bg-brand-red/[0.06] px-4 py-3 text-sm font-medium text-brand-red-dark">
             <AlertCircle className="size-4 shrink-0" aria-hidden="true" />
             {dict.errors.summary}
           </p>
@@ -284,7 +284,7 @@ export function ContactForm({
       </div>
 
       {status.kind === "failure" && (
-        <div role="alert" className="mt-8 rounded-[3px] border border-amber-300 bg-amber-50 px-5 py-4 text-sm leading-7 text-amber-900">
+        <div role="alert" className="mt-8 rounded-[3px] border border-line border-s-4 border-s-brand-red bg-mist px-5 py-4 text-sm leading-7 text-ink">
           {dict.failure[status.reason]}
         </div>
       )}
@@ -294,7 +294,7 @@ export function ContactForm({
           type="submit"
           disabled={submitting}
           aria-disabled={submitting}
-          className="group inline-flex h-14 items-center justify-center gap-3 rounded-[3px] bg-brand-red px-8 text-base font-semibold text-white shadow-[0_12px_28px_-14px_rgb(215_25_32/0.75)] transition-[background-color,transform] duration-300 ease-out-expo hover:bg-brand-red-dark active:scale-[0.98] disabled:cursor-wait disabled:opacity-80"
+          className="group inline-flex h-14 items-center justify-center gap-3 rounded-[3px] bg-brand-red px-8 text-base font-semibold text-white shadow-[0_12px_28px_-14px_rgb(229_57_53/0.75)] transition-[background-color,transform] duration-300 ease-out-expo hover:bg-brand-red-dark active:scale-[0.98] disabled:cursor-wait disabled:opacity-80"
         >
           {submitting && <Loader2 className="size-5 animate-spin motion-reduce:animate-none" aria-hidden="true" />}
           {submitting ? dict.submitting : dict.submit}

@@ -54,12 +54,12 @@ export default async function CreditsPage({ params }: PageProps<"/[lang]/credits
           <ArrowRight className="size-4 ltr:-scale-x-100" strokeWidth={1.6} aria-hidden="true" />
           {t.back}
         </a>
-        <h1 className="mt-10 font-display text-4xl font-bold text-navy sm:text-5xl">{t.title}</h1>
+        <h1 className="mt-10 font-display text-4xl font-bold text-brand-blue sm:text-5xl">{t.title}</h1>
         <p className="mt-6 max-w-2xl text-base leading-8 text-slate">{t.intro}</p>
         <ul className="mt-12 border-t border-line">
           {credits.map((c) => (
             <li key={c.source} className="grid gap-2 border-b border-line py-6 sm:grid-cols-[12rem_1fr] sm:gap-6">
-              <p className="text-sm font-medium text-navy">{t.uses[c.use]}</p>
+              <p className="text-sm font-medium text-brand-blue">{t.uses[c.use]}</p>
               <p dir="ltr" className="text-start text-sm leading-7 text-slate sm:rtl:text-end">
                 <a href={c.source} target="_blank" rel="noopener noreferrer" className="text-brand-blue underline decoration-brand-blue/30 underline-offset-4 hover:decoration-brand-blue">
                   {c.title}

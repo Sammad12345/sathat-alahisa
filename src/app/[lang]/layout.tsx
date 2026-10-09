@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
 }
 
 export const viewport: Viewport = {
-  themeColor: "#08090b",
+  themeColor: "#171717",
   colorScheme: "dark",
 };
 

@@ -32,7 +32,7 @@ export function WhatsAppButton({
       href={whatsappHref(message)}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${base} ${sizes[size]} bg-brand-red text-white shadow-[0_12px_28px_-14px_rgb(215_25_32/0.75)] hover:bg-brand-red-dark hover:shadow-[0_16px_32px_-14px_rgb(215_25_32/0.85)] ${className}`}
+      className={`${base} ${sizes[size]} bg-brand-red text-white shadow-[0_12px_28px_-14px_rgb(229_57_53/0.75)] hover:bg-brand-red-dark hover:shadow-[0_16px_32px_-14px_rgb(229_57_53/0.85)] ${className}`}
     >
       <WhatsAppIcon className="size-5 shrink-0" />
       <span>{children}</span>

@@ -32,7 +32,7 @@ export function Services({
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <Reveal className="lg:col-span-7">
             <SectionEyebrow index="01">{dict.eyebrow}</SectionEyebrow>
-            <h2 id="services-title" className="mt-6 text-balance font-display text-4xl font-bold leading-[1.25] text-navy sm:text-5xl">
+            <h2 id="services-title" className="mt-6 text-balance font-display text-4xl font-bold leading-[1.25] text-brand-blue sm:text-5xl">
               {dict.title}
             </h2>
           </Reveal>
@@ -52,7 +52,7 @@ export function Services({
                     fill
                     placeholder="blur"
                     sizes="(min-width: 1280px) 620px, (min-width: 768px) 50vw, 100vw"
-                    className={`grade object-cover transition-transform duration-[1400ms] ease-out-expo group-hover:scale-[1.045] ${visuals[i].position ?? ""}`}
+                    className={`object-cover transition-transform duration-[1400ms] ease-out-expo group-hover:scale-[1.045] ${visuals[i].position ?? ""}`}
                   />
                   <div className="absolute inset-x-0 top-0 h-24 bg-linear-to-b from-ink/45 to-transparent" />
                   <span dir="ltr" className="absolute end-5 top-5 font-display text-xs tabular-nums text-white/85">
@@ -60,7 +60,7 @@ export function Services({
                   </span>
                 </div>
                 <div className="flex flex-1 flex-col px-6 pb-8 pt-7 sm:px-8 sm:pb-10">
-                  <h3 className="font-display text-2xl font-semibold text-navy">{service.title}</h3>
+                  <h3 className="font-display text-2xl font-semibold text-brand-blue">{service.title}</h3>
                   <p className="mt-4 flex-1 text-[15px] leading-8 text-slate">{service.text}</p>
                   <a
                     href={whatsappHref(serviceMessage(service.title))}
