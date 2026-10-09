@@ -88,8 +88,11 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
       lang={lang}
       dir={dirOf(lang)}
       className={`${plex.variable} ${alexandria.variable} antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-dvh">
+        {/* Marks JS as available before first paint so scroll reveals can safely start hidden. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

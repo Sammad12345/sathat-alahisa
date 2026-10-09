@@ -1,9 +1,9 @@
 import { ArrowUpLeft } from "lucide-react";
 import Image, { type StaticImageData } from "next/image";
-import pickup from "@/assets/photos/own-flatbed-pickup.jpg";
 import accident from "@/assets/photos/service-accident.jpg";
 import breakdown from "@/assets/photos/service-breakdown.jpg";
 import intercity from "@/assets/photos/service-intercity.jpg";
+import cityTransport from "@/assets/photos/own-flatbed-sedan.jpg";
 import { WhatsAppIcon } from "@/components/icons";
 import { Reveal, SectionEyebrow } from "@/components/ui/reveal";
 import type { Dictionary } from "@/i18n/dictionaries/ar";
@@ -12,7 +12,7 @@ import { whatsappHref } from "@/lib/site";
 // Visuals per service, in dictionary order.
 const visuals: { image: StaticImageData; position?: string }[] = [
   { image: breakdown, position: "object-[40%_center]" },
-  { image: pickup, position: "object-[center_40%]" },
+  { image: cityTransport, position: "object-[center_42%]" },
   { image: accident, position: "object-[30%_center]" },
   { image: intercity, position: "object-[center_70%]" },
 ];
@@ -45,7 +45,7 @@ export function Services({
           {dict.items.map((service, i) => (
             <Reveal as="li" key={service.title} delay={(i % 2) * 0.1} className="bg-obsidian">
               <article className="group flex h-full flex-col">
-                <div className="relative aspect-[16/10] overflow-hidden bg-graphite-900">
+                <Reveal variant="unveil" delay={0.05 + (i % 2) * 0.1} className="relative aspect-[16/10] overflow-hidden bg-graphite-900">
                   <Image
                     src={visuals[i].image}
                     alt={service.alt}
@@ -58,7 +58,7 @@ export function Services({
                   <span dir="ltr" className="absolute end-5 top-5 font-display text-xs tabular-nums text-white/70">
                     0{i + 1} / 04
                   </span>
-                </div>
+                </Reveal>
                 <div className="flex flex-1 flex-col px-6 pb-8 pt-2 sm:px-8 sm:pb-10">
                   <h3 className="font-display text-2xl font-semibold text-white">{service.title}</h3>
                   <p className="mt-4 flex-1 text-[15px] leading-8 text-silver-500">{service.text}</p>

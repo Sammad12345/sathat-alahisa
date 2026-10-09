@@ -23,6 +23,7 @@ export function Header({
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const home = localePath(lang);
@@ -35,6 +36,25 @@ export function Header({
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Scroll-spy: mark the nav link for the section currently in the middle of the viewport.
+  useEffect(() => {
+    if (path !== "/") return;
+    const sections = nav.links
+      .map((l) => document.getElementById(l.href.slice(1)))
+      .filter((el): el is HTMLElement => el !== null);
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+          else setActive((current) => (current === `#${entry.target.id}` ? null : current));
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    sections.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [path, nav.links]);
 
   useEffect(() => {
     if (!open) return;
@@ -99,7 +119,8 @@ export function Header({
               <li key={link.href}>
                 <a
                   href={navHref(link.href)}
-                  className="relative py-2 text-[15px] text-silver-300 transition-colors hover:text-white after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-[right] after:scale-x-0 after:bg-white/60 after:transition-transform after:duration-500 hover:after:scale-x-100 ltr:after:origin-[left]"
+                  aria-current={active === link.href ? "location" : undefined}
+                  className="relative py-2 text-[15px] text-silver-300 transition-colors hover:text-white after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-[right] after:scale-x-0 after:bg-white/60 after:transition-transform after:duration-500 hover:after:scale-x-100 aria-[current=location]:text-white aria-[current=location]:after:scale-x-100 aria-[current=location]:after:bg-emerald-bright ltr:after:origin-[left]"
                 >
                   {link.label}
                 </a>

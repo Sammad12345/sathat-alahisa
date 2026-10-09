@@ -6,7 +6,8 @@ const icons = [MessageCircle, Navigation, CarFront, MapPinned];
 
 export function Highlights({ dict }: { dict: Dictionary["highlights"] }) {
   return (
-    <section id="highlights" aria-label={dict.label} className="relative border-b border-white/[0.06] bg-obsidian">
+    <section id="highlights" aria-labelledby="highlights-title" className="relative border-b border-white/[0.06] bg-obsidian">
+      <h2 id="highlights-title" className="sr-only">{dict.label}</h2>
       <ul className="mx-auto grid max-w-7xl gap-px bg-white/[0.06] sm:grid-cols-2 lg:grid-cols-4">
         {dict.items.map(({ title, text }, i) => {
           const Icon = icons[i];
@@ -23,7 +24,7 @@ export function Highlights({ dict }: { dict: Dictionary["highlights"] }) {
                   0{i + 1}
                 </span>
               </div>
-              <h2 className="mt-8 font-display text-lg font-semibold text-silver-100">{title}</h2>
+              <h3 className="mt-8 font-display text-lg font-semibold text-silver-100">{title}</h3>
               <p className="mt-3 text-[15px] leading-7 text-silver-500">{text}</p>
             </Reveal>
           );

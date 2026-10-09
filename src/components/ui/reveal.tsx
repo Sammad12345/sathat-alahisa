@@ -1,37 +1,54 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import { createElement, useEffect, useState, type CSSProperties, type ReactNode } from "react";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
-/** Fades content up once when it scrolls into view. Static when reduced motion is preferred. */
+/**
+ * Reveals content once it scrolls into view ("rise" fades up, "unveil" wipes an image in).
+ * Content is only hidden while the `js` class is present and motion is allowed (see globals.css),
+ * so it stays visible without JavaScript and for reduced-motion users.
+ */
 export function Reveal({
   children,
   delay = 0,
-  y = 28,
   className,
   as = "div",
+  variant = "rise",
 }: {
   children: ReactNode;
   delay?: number;
-  y?: number;
   className?: string;
   as?: "div" | "li" | "article" | "figure";
+  variant?: "rise" | "unveil";
 }) {
-  const reduce = useReducedMotion();
-  const Tag = motion[as];
+  const [node, setNode] = useState<HTMLElement | null>(null);
+  const [shown, setShown] = useState(false);
 
-  return (
-    <Tag
-      className={className}
-      initial={reduce ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -12% 0px" }}
-      transition={{ duration: 0.9, ease: EASE, delay }}
-    >
-      {children}
-    </Tag>
+  useEffect(() => {
+    const el = node;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -10% 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [node]);
+
+  return createElement(
+    as,
+    {
+      ref: setNode,
+      className,
+      "data-reveal": variant,
+      "data-shown": shown ? "" : undefined,
+      style: { "--d": `${delay}s` } as CSSProperties,
+    },
+    children,
   );
 }
 

@@ -1,18 +1,18 @@
 import Image, { type StaticImageData } from "next/image";
 import deck from "@/assets/photos/gallery-deck.jpg";
 import elantra from "@/assets/photos/own-flatbed-elantra.jpg";
+import ready from "@/assets/photos/hero-flatbed.jpg";
 import luxury from "@/assets/photos/own-flatbed-luxury.jpg";
-import sedan from "@/assets/photos/own-flatbed-sedan.jpg";
 import { Reveal, SectionEyebrow } from "@/components/ui/reveal";
 import type { Dictionary } from "@/i18n/dictionaries/ar";
 
 // Layout per tile, in dictionary order (captions and alt text come from the dictionary).
 const tiles: { image: StaticImageData; className: string; sizes: string; position?: string }[] = [
   {
-    image: sedan,
+    image: deck,
     className: "md:col-span-5 md:row-span-2 aspect-[4/5] md:aspect-auto",
     sizes: "(min-width: 768px) 42vw, 100vw",
-    position: "object-[30%_center]",
+    position: "object-[70%_center]",
   },
   {
     image: luxury,
@@ -21,10 +21,10 @@ const tiles: { image: StaticImageData; className: string; sizes: string; positio
     position: "object-[center_45%]",
   },
   {
-    image: deck,
+    image: ready,
     className: "md:col-span-3 aspect-square md:aspect-auto",
     sizes: "(min-width: 768px) 25vw, 100vw",
-    position: "object-[70%_center]",
+    position: "object-[22%_55%]",
   },
   {
     image: elantra,
@@ -52,7 +52,7 @@ export function Gallery({ dict }: { dict: Dictionary["gallery"] }) {
 
         <div className="mt-14 grid gap-3 sm:mt-16 md:auto-rows-[minmax(15rem,1fr)] md:grid-cols-12 md:gap-4 lg:auto-rows-[18rem]">
           {dict.items.map((item, i) => (
-            <Reveal as="figure" key={item.caption} delay={i * 0.08} className={`group relative overflow-hidden bg-graphite-900 ${tiles[i].className}`}>
+            <Reveal as="figure" variant="unveil" key={item.caption} delay={i * 0.1} className={`group relative overflow-hidden bg-graphite-900 ${tiles[i].className}`}>
               <Image
                 src={tiles[i].image}
                 alt={item.alt}

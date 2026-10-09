@@ -61,7 +61,9 @@ export const en: Dictionary = {
     title: ["The flatbed you need,", "when you need it"],
     subtitle: "Moving your car starts with one call",
     body: "Car towing and transport across Al-Ahsa and Al-Hofuf, made simple. Message us on WhatsApp with your location and your car's details.",
-    imageAlt: "A modern flatbed tow truck with a warning light bar on its roof",
+    imageAlt: "Our red flatbed carrying a white pickup along a palm-lined road",
+    photoCaption: "Our work",
+    formLink: "Or send your request with the form",
     specs: [
       { label: "Coverage", value: "Within Al-Ahsa and Al-Hofuf" },
       { label: "Further afield", value: "Other cities by arrangement" },
@@ -93,7 +95,7 @@ export const en: Dictionary = {
       {
         title: "Flatbed car transport",
         text: "Your car rides fully loaded on the flatbed instead of being driven — ideal for cars that won't run or shouldn't be driven.",
-        alt: "Our flatbed carrying a white pickup truck on the road",
+        alt: "Our flatbed carrying a grey sedan through the city",
       },
       {
         title: "Accident vehicle transport",
@@ -133,11 +135,11 @@ export const en: Dictionary = {
   gallery: {
     eyebrow: "On the road",
     title: "The details that matter, every trip",
-    note: "Photos from our own jobs, plus one illustrative image.",
+    note: "Photos from our own jobs, alongside illustrative images.",
     items: [
-      { caption: "Our work: a city transport", alt: "Our red flatbed carrying a grey sedan on a city street" },
-      { caption: "Our work: secured on the deck", alt: "A white luxury sedan secured on our red flatbed deck" },
       { caption: "Illustrative: the loading deck", alt: "A silver car's wheel on the perforated metal deck of a flatbed in a workshop" },
+      { caption: "Our work: secured on the deck", alt: "A white luxury sedan secured on our red flatbed deck" },
+      { caption: "Illustrative: ready for the road", alt: "The front of a modern flatbed tow truck with a warning light bar" },
       { caption: "Our work: a car on the flatbed", alt: "A grey Hyundai loaded on our flatbed" },
     ],
   },
@@ -185,6 +187,49 @@ export const en: Dictionary = {
     body: "Send your location and car details, and we'll follow up on your transport request on WhatsApp.",
     cta: "Request the service on WhatsApp",
     orCall: "Or call us directly",
+    directHeading: "Direct contact",
+    directNote: "For urgent cases, a call or WhatsApp is fastest.",
+  },
+  form: {
+    heading: "Submit a service request",
+    intro: "Fill in the details so we can review your request and contact you on your number. Fields marked * are required.",
+    requiredMark: "required",
+    fields: {
+      name: { label: "Name", placeholder: "Your name" },
+      phone: { label: "Phone number", placeholder: "+966 5X XXX XXXX", hint: "Saudi or international number" },
+      email: { label: "Email (optional)", placeholder: "name@example.com" },
+      service: { label: "Service type", placeholder: "Choose a service", other: "Other service" },
+      location: { label: "Vehicle location", placeholder: "District, street or a location link" },
+      destination: { label: "Destination", placeholder: "Where should the car go?" },
+      details: { label: "Additional details", placeholder: "Car type and condition, or anything we should know" },
+    },
+    submit: "Submit Service Request",
+    submitting: "Sending…",
+    whatsappAlt: "Or send the same details on WhatsApp",
+    whatsappReview: "A ready-made message opens in WhatsApp for you to review before sending.",
+    errors: {
+      required: "This field is required.",
+      phone: "Enter a valid phone number of 8 to 15 digits.",
+      email: "Enter a valid email address.",
+      tooLong: "This text is too long.",
+      summary: "Please correct the highlighted fields before submitting.",
+    },
+    success: {
+      title: "Your request has been sent",
+      body: "Your request reached us by email. For urgent cases, contact us directly on WhatsApp or by phone.",
+      again: "Send another request",
+    },
+    failure: {
+      notConfigured: "Online submission isn't available right now, so your request was not sent. You can send the same details on WhatsApp instead.",
+      rateLimited: "You've sent several requests in a short time. Please try again shortly or contact us on WhatsApp.",
+      generic: "Your request couldn't be sent and did not reach us. Please try again or send the details on WhatsApp.",
+    },
+    whatsappIntro: "Hello, I'd like to request a flatbed tow truck.",
+  },
+  notFound: {
+    title: "Page not found",
+    body: "The link may have changed, or the page is no longer available.",
+    home: "Back to the home page",
   },
   footer: {
     about: "Flatbed towing and transport for broken-down and damaged cars in Al-Ahsa and Al-Hofuf, with transport to other cities by arrangement.",
@@ -203,7 +248,6 @@ export const en: Dictionary = {
     intro:
       "Some photos on this site are from our own jobs; others are illustrative images of flatbed and transport services and do not show our vehicles. The illustrative images have been cropped and color-graded and are used under the licenses listed below.",
     uses: {
-      hero: "Hero section",
       breakdown: "Broken-down car towing",
       accident: "Accident vehicle transport",
       intercity: "Transport between locations & cities",

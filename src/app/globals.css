@@ -105,3 +105,71 @@ body {
     animation: scroll-cue 2.2s var(--ease-out-expo) infinite;
   }
 }
+
+/* ---------- Motion system ----------
+   Every effect is opt-in under prefers-reduced-motion: no-preference.
+   Load-time entrances are pure CSS (never wait on JavaScript); scroll reveals only
+   hide content once the `js` class confirms the observer that will show it is running. */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+}
+
+@keyframes unveil {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes drift {
+  to {
+    transform: translateY(8%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-rise {
+    animation: rise 1s var(--ease-out-expo) var(--d, 0s) both;
+  }
+
+  .animate-unveil {
+    animation: unveil 1.4s var(--ease-out-expo) var(--d, 0s) both;
+  }
+
+  /* Gentle hero drift tied to page scroll, where scroll-driven animations are supported */
+  @supports (animation-timeline: scroll()) {
+    .scroll-drift {
+      animation: drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+  }
+
+  [data-reveal] {
+    transition:
+      opacity 0.9s var(--ease-out-expo) var(--d, 0s),
+      transform 0.9s var(--ease-out-expo) var(--d, 0s),
+      clip-path 1.2s var(--ease-out-expo) var(--d, 0s);
+  }
+
+  .js [data-reveal="rise"]:not([data-shown]) {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  .js [data-reveal="unveil"]:not([data-shown]) {
+    clip-path: inset(100% 0 0 0);
+  }
+
+  /* Language switch: a brief, calm fade before the page in the other language loads */
+  html.is-switching body {
+    opacity: 0;
+    transition: opacity 0.22s ease;
+  }
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { type Locale, switchPath } from "@/i18n/config";
 
 const OPTIONS: { locale: Locale; label: string; short: string }[] = [
@@ -30,9 +30,25 @@ export function LanguageSwitcher({
   useEffect(() => {
     const sync = () => setHash(window.location.hash);
     sync();
+    // Undo the exit fade if the browser restores this page from the back/forward cache.
+    const restore = () => document.documentElement.classList.remove("is-switching");
     window.addEventListener("hashchange", sync);
-    return () => window.removeEventListener("hashchange", sync);
+    window.addEventListener("pageshow", restore);
+    return () => {
+      window.removeEventListener("hashchange", sync);
+      window.removeEventListener("pageshow", restore);
+    };
   }, []);
+
+  /** Brief fade-out before loading the other language (skipped for modified clicks and reduced motion). */
+  const onSwitch = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    event.preventDefault();
+    const target = event.currentTarget.href;
+    document.documentElement.classList.add("is-switching");
+    window.setTimeout(() => window.location.assign(target), 200);
+  };
 
   const full = size === "full";
 
@@ -53,6 +69,7 @@ export function LanguageSwitcher({
                 hrefLang={option.locale}
                 lang={option.locale}
                 aria-current={active ? "true" : undefined}
+                onClick={active ? undefined : onSwitch}
                 className={`flex h-full items-center justify-center px-2.5 text-[13px] transition-colors sm:px-3.5 ${
                   full ? "w-full text-[15px]" : ""
                 } ${active ? "font-semibold text-white" : "text-silver-500 hover:text-white"}`}
