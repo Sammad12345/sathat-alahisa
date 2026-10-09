@@ -172,7 +172,7 @@ export function LanguageDropdown({
   };
 
   return (
-    <div ref={root} className="relative">
+    <div ref={root} className="relative shrink-0">
       <button
         ref={trigger}
         type="button"
@@ -182,7 +182,7 @@ export function LanguageDropdown({
         aria-label={`${label}: ${current.label}`}
         onClick={() => setOpen((v) => !v)}
         onKeyDown={onTriggerKey}
-        className={`inline-flex h-10 items-center gap-1.5 rounded-[3px] border px-2.5 text-[13px] font-semibold transition-colors duration-300 sm:gap-2 sm:px-3 ${
+        className={`inline-flex h-10 items-center gap-1 rounded-[3px] border px-2 text-[13px] font-semibold transition-colors duration-300 min-[360px]:gap-1.5 min-[360px]:px-2.5 sm:gap-2 sm:px-3 ${
           dark
             ? "border-white/25 bg-white/[0.06] text-white backdrop-blur-sm hover:border-white/50"
             : "border-line bg-paper text-ink hover:border-brand-blue hover:text-brand-blue"

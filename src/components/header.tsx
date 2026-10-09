@@ -90,7 +90,7 @@ export function Header({
       path={path}
       label={nav.language}
       tone={light ? "onLight" : "onDark"}
-      align={lang === "ar" ? "start" : "end"}
+      align="end"
     />
   );
 
@@ -110,19 +110,19 @@ export function Header({
       </a>
 
       <div
-        className={`mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 transition-[height] duration-500 sm:gap-6 sm:px-6 lg:px-10 ${
+        className={`mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 transition-[height] duration-500 min-[360px]:gap-3 min-[360px]:px-4 sm:gap-6 sm:px-6 lg:px-10 ${
           scrolled ? "h-16" : "h-20"
         }`}
       >
-        <div className="flex min-w-0 items-center gap-3 sm:gap-5">
+        <div className="flex min-w-0 items-center gap-2 min-[360px]:gap-3 sm:gap-5">
           <a
             href={path === "/" ? "#top" : home}
-            className={`flex min-w-0 items-center gap-3 transition-colors duration-500 ${light ? "text-brand-blue" : "text-white"}`}
+            className={`flex min-w-0 items-center gap-2 transition-colors duration-500 sm:gap-3 ${light ? "text-brand-blue" : "text-white"}`}
             aria-label={`${BUSINESS_NAME} — ${common.home}`}
           >
-            <BrandMark className={`hidden size-9 shrink-0 transition-colors duration-500 min-[400px]:block ${light ? "text-brand-blue" : "text-white"}`} />
+            <BrandMark className={`size-7 shrink-0 transition-colors duration-500 min-[360px]:size-8 sm:size-9 ${light ? "text-brand-blue" : "text-white"}`} />
             <span className="flex min-w-0 flex-col leading-tight">
-              <span lang="ar" className="line-clamp-2 font-display text-[13px] font-bold leading-snug sm:truncate sm:text-base sm:leading-tight">{BUSINESS_NAME}</span>
+              <span lang="ar" className="line-clamp-2 text-balance font-display text-[12px] font-bold leading-snug min-[360px]:text-[13px] sm:truncate sm:text-base sm:leading-tight">{BUSINESS_NAME}</span>
               <span className={`hidden text-[11px] tracking-wide sm:block ${light ? "text-brand-blue" : "text-white/70"}`}>{common.tagline}</span>
             </span>
           </a>
